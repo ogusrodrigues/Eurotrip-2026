@@ -477,6 +477,7 @@
       max-width: 100%;
     }
 
+    /* PAINEL LATERAL DE DETALHES */
     .day-details-panel {
       background: #ffffff;
       border: 1.5px solid #bae6fd;
@@ -502,9 +503,68 @@
       color: var(--blue-vibrant);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       padding-bottom: 6px;
       border-bottom: 1.5px solid #f0f7fb;
+    }
+
+    /* WIDGET METEOROLÓGICO */
+    .weather-widget {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 1.5px solid #bae6fd;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .weather-icon {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+
+    .weather-temp {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      line-height: 1.1;
+    }
+
+    .weather-desc {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+    }
+
+    .weather-btn {
+      background: #ffffff;
+      color: #0284c7;
+      border: 1px solid #7dd3fc;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .weather-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
     }
 
     .timeline-wrap {
@@ -1000,6 +1060,20 @@
           <h3 class="panel-date" id="p-title">24 de Outubro</h3>
           <div class="panel-city" id="p-sub">São Paulo ➔ Barcelona</div>
 
+          <!-- MINI WIDGET CLIMÁTICO -->
+          <div class="weather-widget" id="weatherWidget">
+            <div class="weather-main">
+              <span class="weather-icon" id="w-icon">🌤️</span>
+              <div>
+                <div class="weather-temp" id="w-temp">Carregando clima...</div>
+                <div class="weather-desc" id="w-desc">Consultando dados meteorológicos</div>
+              </div>
+            </div>
+            <a class="weather-btn" id="w-btn" href="#" target="_blank" rel="noopener">
+              <span>🌦️ No Google</span>
+            </a>
+          </div>
+
           <div class="timeline-wrap" id="p-timeline"></div>
 
           <div class="docs-section">
@@ -1258,10 +1332,71 @@
     countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
 
+    // INTERPRETAÇÃO DOS CÓDIGOS WMO DA OPEN-METEO
+    function interpretWMO(code) {
+      if (code === 0) return { desc: "Céu limpo", icon: "☀️" };
+      if (code === 1 || code === 2) return { desc: "Predomínio de sol", icon: "🌤️" };
+      if (code === 3) return { desc: "Nublado", icon: "☁️" };
+      if (code >= 45 && code <= 48) return { desc: "Nevoeiro", icon: "🌫️" };
+      if (code >= 51 && code <= 55) return { desc: "Garoa leve", icon: "🌦️" };
+      if (code >= 61 && code <= 65) return { desc: "Chuva", icon: "🌧️" };
+      if (code >= 71 && code <= 77) return { desc: "Neve", icon: "🌨️" };
+      if (code >= 80 && code <= 82) return { desc: "Pancadas de chuva", icon: "🌧️" };
+      if (code >= 95) return { desc: "Trovoada", icon: "⛈️" };
+      return { desc: "Parcialmente nublado", icon: "⛅" };
+    }
+
+    // CARREGADOR DE METEOROLOGIA ASSÍNCRONO
+    async function loadWeather(data) {
+      const widget = document.getElementById('weatherWidget');
+      const tempEl = document.getElementById('w-temp');
+      const descEl = document.getElementById('w-desc');
+      const iconEl = document.getElementById('w-icon');
+      const btnEl = document.getElementById('w-btn');
+
+      if (!data.city || !data.lat || !data.lon) {
+        widget.style.display = 'none';
+        return;
+      }
+
+      widget.style.display = 'flex';
+      btnEl.href = `https://www.google.com/search?q=${encodeURIComponent('clima em ' + data.city)}`;
+      tempEl.innerText = "Consultando...";
+      descEl.innerText = `Previsão para ${data.city}`;
+      iconEl.innerText = "⏳";
+
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&current=temperature_2m,apparent_temperature,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+        const res = await fetch(url);
+        const wData = await res.json();
+
+        if (wData && wData.current) {
+          const currentTemp = Math.round(wData.current.temperature_2m);
+          const maxTemp = Math.round(wData.daily.temperature_2m_max[0]);
+          const minTemp = Math.round(wData.daily.temperature_2m_min[0]);
+          const rainProb = wData.daily.precipitation_probability_max[0] || 0;
+          const wInfo = interpretWMO(wData.current.weather_code);
+
+          iconEl.innerText = wInfo.icon;
+          tempEl.innerText = `${currentTemp}°C (${minTemp}°C a ${maxTemp}°C)`;
+          descEl.innerText = `${wInfo.desc} • ${rainProb}% chuva • ${data.city}`;
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        iconEl.innerText = "🌤️";
+        tempEl.innerText = `Ver clima de ${data.city}`;
+        descEl.innerText = "Toque no botão ao lado para abrir no Google";
+      }
+    }
+
     const tripDays = {
       "2026-10-24": {
         title: "24 de Outubro (Sábado)",
         subtitle: "São Paulo ➔ Barcelona",
+        city: "São Paulo",
+        lat: -23.5505,
+        lon: -46.6333,
         timeline: [
           { 
             time: "15:00", 
@@ -1301,6 +1436,9 @@
       "2026-10-25": {
         title: "25 de Outubro (Domingo)",
         subtitle: "Chegada em Barcelona",
+        city: "Barcelona",
+        lat: 41.3879,
+        lon: 2.1699,
         timeline: [
           { 
             time: "08:40", 
@@ -1345,6 +1483,9 @@
       "2026-10-26": {
         title: "26 de Outubro (Segunda-feira)",
         subtitle: "Barcelona • Sagrada Família",
+        city: "Barcelona",
+        lat: 41.3879,
+        lon: 2.1699,
         timeline: [
           { 
             time: "10:00", 
@@ -1390,6 +1531,9 @@
       "2026-10-27": {
         title: "27 de Outubro (Terça-feira)",
         subtitle: "Barcelona ➔ Andorra La Vella",
+        city: "Andorra la Vella",
+        lat: 42.5063,
+        lon: 1.5218,
         timeline: [
           { 
             time: "06:15", 
@@ -1445,6 +1589,9 @@
       "2026-10-28": {
         title: "28 de Outubro (Quarta-feira)",
         subtitle: "Andorra La Vella ➔ Barcelona",
+        city: "Barcelona",
+        lat: 41.3879,
+        lon: 2.1699,
         timeline: [
           { 
             time: "10:00", 
@@ -1492,6 +1639,9 @@
       "2026-10-29": {
         title: "29 de Outubro (Quinta-feira)",
         subtitle: "Barcelona ➔ Amsterdã",
+        city: "Amsterdã",
+        lat: 52.3676,
+        lon: 4.9041,
         timeline: [
           { 
             time: "16:30", 
@@ -1534,6 +1684,9 @@
       "2026-10-30": {
         title: "30 de Outubro (Sexta-feira)",
         subtitle: "Amsterdã • Anne Frank",
+        city: "Amsterdã",
+        lat: 52.3676,
+        lon: 4.9041,
         timeline: [
           { 
             time: "10:15", 
@@ -1576,6 +1729,9 @@
       "2026-10-31": {
         title: "31 de Outubro (Sábado)",
         subtitle: "Amsterdã Livre",
+        city: "Amsterdã",
+        lat: 52.3676,
+        lon: 4.9041,
         timeline: [
           { 
             time: "10:00", 
@@ -1616,6 +1772,9 @@
       "2026-11-01": {
         title: "01 de Novembro (Domingo)",
         subtitle: "Amsterdã ➔ Bruxelas",
+        city: "Bruxelas",
+        lat: 50.8503,
+        lon: 4.3517,
         timeline: [
           { 
             time: "10:30", 
@@ -1656,6 +1815,9 @@
       "2026-11-02": {
         title: "02 de Novembro (Segunda-feira)",
         subtitle: "Bruxelas",
+        city: "Bruxelas",
+        lat: 50.8503,
+        lon: 4.3517,
         timeline: [
           { 
             time: "09:30", 
@@ -1697,6 +1859,9 @@
       "2026-11-03": {
         title: "03 de Novembro (Terça-feira)",
         subtitle: "Bruxelas ➔ Milão",
+        city: "Milão",
+        lat: 45.4642,
+        lon: 9.1900,
         timeline: [
           { 
             time: "07:30", 
@@ -1747,6 +1912,9 @@
       "2026-11-04": {
         title: "04 de Novembro (Quarta-feira)",
         subtitle: "Milão ➔ Bernina Express (Alpes) ➔ Milão",
+        city: "St. Moritz",
+        lat: 46.4908,
+        lon: 9.8355,
         timeline: [
           { 
             time: "06:20", 
@@ -1805,6 +1973,9 @@
       "2026-11-05": {
         title: "05 de Novembro (Quinta-feira)",
         subtitle: "Milão ➔ Florença",
+        city: "Florença",
+        lat: 43.7696,
+        lon: 11.2558,
         timeline: [
           { 
             time: "12:30", 
@@ -1845,6 +2016,9 @@
       "2026-11-06": {
         title: "06 de Novembro (Sexta-feira)",
         subtitle: "Florença • David de Michelangelo",
+        city: "Florença",
+        lat: 43.7696,
+        lon: 11.2558,
         timeline: [
           { 
             time: "09:30", 
@@ -1883,6 +2057,9 @@
       "2026-11-07": {
         title: "07 de Novembro (Sábado)",
         subtitle: "Bate-volta Pisa & Lucca",
+        city: "Pisa",
+        lat: 43.7228,
+        lon: 10.4017,
         timeline: [
           { 
             time: "08:30", 
@@ -1944,6 +2121,9 @@
       "2026-11-08": {
         title: "08 de Novembro (Domingo)",
         subtitle: "Florença / Vale do Chianti",
+        city: "Florença",
+        lat: 43.7696,
+        lon: 11.2558,
         timeline: [
           { 
             time: "10:00", 
@@ -1982,6 +2162,9 @@
       "2026-11-09": {
         title: "09 de Novembro (Segunda-feira)",
         subtitle: "Florença ➔ Roma",
+        city: "Roma",
+        lat: 41.9028,
+        lon: 12.4964,
         timeline: [
           { 
             time: "12:00", 
@@ -2018,6 +2201,9 @@
       "2026-11-10": {
         title: "10 de Novembro (Terça-feira)",
         subtitle: "Roma • Coliseu & Fórum Romano",
+        city: "Roma",
+        lat: 41.9028,
+        lon: 12.4964,
         timeline: [
           { 
             time: "08:30", 
@@ -2082,6 +2268,9 @@
       "2026-11-11": {
         title: "11 de Novembro (Quarta-feira)",
         subtitle: "Vaticano & Capela Sistina",
+        city: "Roma",
+        lat: 41.9028,
+        lon: 12.4964,
         timeline: [
           { 
             time: "09:00", 
@@ -2127,6 +2316,9 @@
       "2026-11-12": {
         title: "12 de Novembro (Quinta-feira)",
         subtitle: "Roma • Trastevere & Jardins",
+        city: "Roma",
+        lat: 41.9028,
+        lon: 12.4964,
         timeline: [
           { 
             time: "10:00", 
@@ -2163,6 +2355,9 @@
       "2026-11-13": {
         title: "13 de Novembro (Sexta-feira)",
         subtitle: "Roma ➔ Barcelona",
+        city: "Barcelona",
+        lat: 41.3879,
+        lon: 2.1699,
         timeline: [
           { 
             time: "12:00", 
@@ -2199,6 +2394,9 @@
       "2026-11-14": {
         title: "14 de Novembro (Sábado)",
         subtitle: "Barcelona ➔ São Paulo (Brasil)",
+        city: "São Paulo",
+        lat: -23.5505,
+        lon: -46.6333,
         timeline: [
           { 
             time: "09:00", 
@@ -2242,6 +2440,9 @@
 
       document.getElementById('p-title').innerText = data.title;
       document.getElementById('p-sub').innerText = data.subtitle;
+
+      // ATUALIZA O MINI WIDGET DE METEOROLOGIA AUTOMATICAMENTE
+      loadWeather(data);
 
       const tBox = document.getElementById('p-timeline');
       tBox.innerHTML = '';
