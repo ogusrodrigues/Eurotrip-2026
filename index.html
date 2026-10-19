@@ -36,7 +36,7 @@
       color: var(--ink);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
-      padding: 16px 10px 36px;
+      padding: 12px 8px 36px;
       display: flex;
       justify-content: center;
     }
@@ -56,7 +56,7 @@
     /* TOP NAVIGATION */
     .top-nav {
       background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-main) 50%, var(--blue-deep) 100%);
-      padding: 16px 20px;
+      padding: 16px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -98,6 +98,7 @@
       font-weight: 500;
     }
 
+    /* NAV TABS RESPONSIVAS */
     .nav-tabs {
       display: flex;
       background: rgba(255, 255, 255, 0.08);
@@ -105,6 +106,7 @@
       border-radius: 30px;
       border: 1px solid rgba(255, 255, 255, 0.15);
       gap: 4px;
+      max-width: 100%;
     }
 
     .nav-tab-btn {
@@ -113,13 +115,14 @@
       color: #e0f2fe;
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       padding: 8px 14px;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       white-space: nowrap;
     }
@@ -135,10 +138,36 @@
       box-shadow: 0 4px 10px rgba(0, 180, 216, 0.35);
     }
 
+    /* AJUSTE FINO MOBILE DO MENU */
+    @media (max-width: 680px) {
+      .top-nav {
+        padding: 14px 12px;
+      }
+      .brand {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .nav-tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-radius: 14px;
+        gap: 3px;
+        padding: 3px;
+      }
+      .nav-tab-btn {
+        padding: 8px 4px;
+        font-size: 0.76rem;
+        border-radius: 10px;
+        gap: 4px;
+      }
+    }
+
     /* VIEW CONTENT */
     .view-content {
       display: none;
-      padding: 24px 18px;
+      padding: 20px 14px;
       width: 100%;
     }
     .view-content.active-view {
@@ -156,11 +185,11 @@
       background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
       border: 1.5px solid #bae6fd;
       border-radius: var(--radius-lg);
-      padding: 28px 16px 20px;
+      padding: 26px 14px 18px;
       text-align: center;
       position: relative;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .hero-badge {
@@ -181,7 +210,7 @@
 
     .hero-title {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
       font-weight: 900;
       color: var(--navy-dark);
       letter-spacing: -0.5px;
@@ -190,10 +219,10 @@
     }
 
     .hero-subtitle {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
       color: var(--blue-deep);
       max-width: 620px;
-      margin: 0 auto 24px;
+      margin: 0 auto 20px;
       font-weight: 600;
     }
 
@@ -201,8 +230,8 @@
     .countdown-grid {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 8px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
@@ -210,8 +239,8 @@
       background: #ffffff;
       border: 1.5px solid #90e0ef;
       border-radius: var(--radius-md);
-      padding: 12px 16px;
-      min-width: 80px;
+      padding: 10px 14px;
+      min-width: 72px;
       box-shadow: 0 6px 16px rgba(0, 119, 182, 0.1);
       display: flex;
       flex-direction: column;
@@ -220,14 +249,14 @@
 
     .timer-value {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-size: clamp(1.7rem, 3.5vw, 2.3rem);
       font-weight: 900;
       color: var(--blue-vibrant);
       line-height: 1;
     }
 
     .timer-label {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 800;
       color: var(--ink-muted);
       text-transform: uppercase;
@@ -239,12 +268,12 @@
       background: linear-gradient(135deg, var(--navy-main), var(--blue-vibrant));
       color: #ffffff;
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
       font-weight: 900;
-      padding: 16px 24px;
+      padding: 14px 22px;
       border-radius: 14px;
       box-shadow: 0 8px 20px rgba(0, 119, 182, 0.3);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       display: inline-block;
       border: 2px solid #bae6fd;
     }
@@ -259,20 +288,20 @@
     .cartoon-skyline-wrapper svg {
       width: 100%;
       height: auto;
-      max-height: 140px;
+      max-height: 135px;
       display: block;
     }
 
     .flight-strip {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       background: #ffffff;
       border: 1.5px dashed var(--blue-deep);
       border-radius: 30px;
-      padding: 8px 16px;
-      margin-top: 18px;
-      font-size: 0.82rem;
+      padding: 8px 14px;
+      margin-top: 16px;
+      font-size: 0.8rem;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -285,14 +314,14 @@
     .stats-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .stat-box {
       background: #ffffff;
       border: 1.5px solid #dbeafe;
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 14px;
       box-shadow: var(--shadow-sm);
       display: flex;
       align-items: center;
@@ -300,38 +329,36 @@
     }
 
     .stat-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       background: var(--blue-ice);
       color: var(--blue-vibrant);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       flex-shrink: 0;
     }
 
     .stat-info h4 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       color: var(--navy-main);
     }
 
     .stat-info p {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--ink-muted);
       font-weight: 600;
     }
 
-    /* ==============================================
-       CALENDAR RESPONSIVE LAYOUT (SEM CORTES)
-    ================================================= */
+    /* CALENDAR RESPONSIVE LAYOUT */
     .calendar-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.8fr) minmax(300px, 1fr);
-      gap: 20px;
+      gap: 18px;
       align-items: start;
       width: 100%;
     }
@@ -346,7 +373,7 @@
       background: #ffffff;
       border: 1.5px solid #e2e8f0;
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 14px;
       box-shadow: var(--shadow-sm);
       width: 100%;
       overflow-x: auto;
@@ -356,33 +383,32 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       border-bottom: 1.5px solid #f1f5f9;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
       gap: 8px;
     }
 
     .cal-header h3 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
       font-weight: 800;
       color: var(--navy-main);
     }
 
     .cal-header span {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--blue-vibrant);
     }
 
-    /* GRADE FLUIDA COM LARGURA MÍNIMA SEGURA */
     .cal-grid-wrapper {
-      min-width: 580px; /* Garante visual limpo no celular via scroll se a tela for estreita */
+      min-width: 560px;
     }
 
     @media (min-width: 961px) {
       .cal-grid-wrapper {
-        min-width: 100%; /* Ocupa 100% no notebook sem scrollbar desnecessária */
+        min-width: 100%;
       }
     }
 
@@ -402,7 +428,7 @@
     }
 
     .day-cell {
-      min-height: 76px;
+      min-height: 74px;
       background: #f8fafc;
       border: 1.5px solid #e2e8f0;
       border-radius: 8px;
@@ -437,13 +463,13 @@
     .day-num {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--navy-dark);
       line-height: 1;
     }
 
     .day-dest-tag {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 800;
       color: var(--blue-deep);
       text-transform: uppercase;
@@ -453,7 +479,7 @@
     }
 
     .day-pill {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       padding: 1.5px 4px;
       background: rgba(0, 119, 182, 0.1);
       color: var(--blue-deep);
@@ -472,7 +498,7 @@
       background: #ffffff;
       border: 1.5px solid #bae6fd;
       border-radius: var(--radius-md);
-      padding: 20px;
+      padding: 18px;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
@@ -481,33 +507,33 @@
 
     .panel-date {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 900;
       color: var(--navy-dark);
       line-height: 1.15;
     }
 
     .panel-city {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--blue-vibrant);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
       border-bottom: 1.5px solid #f0f7fb;
     }
 
     .timeline-wrap {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
     .timeline-row {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-start;
     }
 
@@ -516,10 +542,10 @@
       color: #ffffff;
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       padding: 3px 6px;
       border-radius: 6px;
-      min-width: 52px;
+      min-width: 50px;
       text-align: center;
       flex-shrink: 0;
       margin-top: 2px;
@@ -529,21 +555,21 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 6px 10px;
+      padding: 6px 9px;
       flex: 1;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
 
     .timeline-content strong {
       display: block;
       color: var(--navy-main);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       margin-bottom: 2px;
     }
 
     .docs-section h4 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 800;
       color: var(--navy-main);
       margin-bottom: 8px;
@@ -556,7 +582,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .doc-link-btn {
@@ -570,7 +596,7 @@
       color: var(--navy-dark);
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       transition: all 0.2s ease;
       gap: 6px;
     }
@@ -584,7 +610,7 @@
 
     .doc-link-btn .pill {
       font-size: 0.65rem;
-      padding: 2px 6px;
+      padding: 2px 5px;
       border-radius: 4px;
       background: #ffffff;
       color: var(--blue-deep);
@@ -608,7 +634,7 @@
 
     .panel-sketch svg {
       width: 100%;
-      height: 80px;
+      height: 75px;
       stroke: var(--blue-deep);
       fill: none;
       stroke-width: 1.8;
@@ -618,7 +644,7 @@
 
     .panel-sketch-caption {
       font-family: 'Caveat', cursive;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--ink-muted);
       margin-top: 2px;
     }
@@ -627,23 +653,23 @@
     .all-docs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
 
     .doc-category-card {
       background: #ffffff;
       border: 1.5px solid #e2e8f0;
       border-radius: var(--radius-md);
-      padding: 16px;
+      padding: 14px;
       box-shadow: var(--shadow-sm);
     }
 
     .doc-category-card h3 {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--navy-dark);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -655,11 +681,11 @@
     .emergency-footer {
       background: var(--navy-dark);
       color: #ffffff;
-      padding: 16px 20px;
+      padding: 14px 18px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      font-size: 0.8rem;
+      gap: 10px;
+      font-size: 0.78rem;
       border-top: 3px solid var(--blue-sky);
     }
 
@@ -680,9 +706,9 @@
         </div>
       </div>
       <div class="nav-tabs">
-        <button class="nav-tab-btn active" onclick="switchView('home')">🏠 Início & Contagem</button>
-        <button class="nav-tab-btn" onclick="switchView('calendar')">📅 Calendário Diário</button>
-        <button class="nav-tab-btn" onclick="switchView('docs')">📂 Central de Arquivos</button>
+        <button class="nav-tab-btn active" onclick="switchView('home')">🏠 Início</button>
+        <button class="nav-tab-btn" onclick="switchView('calendar')">📅 Calendário</button>
+        <button class="nav-tab-btn" onclick="switchView('docs')">📂 Arquivos</button>
       </div>
     </header>
 
