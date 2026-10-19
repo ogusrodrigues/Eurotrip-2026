@@ -51,7 +51,6 @@
       position: relative;
     }
 
-    /* Washi tape decoration */
     .washi-tape {
       position: absolute;
       top: -14px;
@@ -112,7 +111,6 @@
       transform: rotate(2deg);
     }
 
-    /* Grid layout */
     .main-grid {
       display: grid;
       grid-template-columns: 1fr 390px;
@@ -123,7 +121,6 @@
       .main-grid { grid-template-columns: 1fr; }
     }
 
-    /* Calendar styles */
     .calendar-container {
       background: #fffefb;
       border: 2.5px solid var(--ink);
@@ -222,7 +219,6 @@
       margin-top: 4px;
     }
 
-    /* Day details panel */
     .details-panel {
       background: #fff;
       border: 2.5px solid var(--ink);
@@ -273,7 +269,6 @@
       display: flex;
       gap: 10px;
       align-items: flex-start;
-      position: relative;
     }
 
     .timeline-time {
@@ -346,7 +341,6 @@
       font-weight: 800;
     }
 
-    /* Sketches / illustrations */
     .sketch-card {
       margin-top: 18px;
       background: #fffdf7;
@@ -374,7 +368,6 @@
       font-weight: 700;
     }
 
-    /* Bottom utilities */
     .quick-bar {
       margin-top: 28px;
       display: grid;
@@ -430,7 +423,6 @@
     </header>
 
     <div class="main-grid">
-      <!-- CALENDAR GRID -->
       <section class="calendar-container">
         <div class="calendar-header">
           <h2>Outubro / Novembro 2026</h2>
@@ -446,7 +438,6 @@
           <div class="day-name">SEX</div>
           <div class="day-name">SÁB</div>
 
-          <!-- Linha 1 -->
           <div class="day-card empty"></div>
           <div class="day-card empty"></div>
           <div class="day-card empty"></div>
@@ -456,10 +447,9 @@
           <div class="day-card" onclick="selectDay('2026-10-24')">
             <span class="day-number">24/10</span>
             <span class="day-dest">Saída SP</span>
-            <span class="day-badge">✈️ Voo LATAM</span>
+            <span class="day-badge">✈️ LATAM</span>
           </div>
 
-          <!-- Linha 2 -->
           <div class="day-card" onclick="selectDay('2026-10-25')">
             <span class="day-number">25/10</span>
             <span class="day-dest">Barcelona</span>
@@ -496,7 +486,6 @@
             <span class="day-badge">🚲 Livre</span>
           </div>
 
-          <!-- Linha 3 -->
           <div class="day-card" onclick="selectDay('2026-11-01')">
             <span class="day-number">01/11</span>
             <span class="day-dest">AMS ➔ Bruxelas</span>
@@ -533,7 +522,6 @@
             <span class="day-badge">🚆 Bate-volta</span>
           </div>
 
-          <!-- Linha 4 -->
           <div class="day-card" onclick="selectDay('2026-11-08')">
             <span class="day-number">08/11</span>
             <span class="day-dest">Florença / Chianti</span>
@@ -557,69 +545,66 @@
           <div class="day-card" onclick="selectDay('2026-11-12')">
             <span class="day-number">12/11</span>
             <span class="day-dest">Roma</span>
-            <span class="day-badge">🏛️ Panteão / Fontana</span>
+            <span class="day-badge">🏛️ Panteão / Trevi</span>
           </div>
           <div class="day-card" onclick="selectDay('2026-11-13')">
             <span class="day-number">13/11</span>
             <span class="day-dest">Roma ➔ BCN</span>
-            <span class="day-badge">✈️ Iberia Voo</span>
+            <span class="day-badge">✈️ Vueling / IB</span>
           </div>
           <div class="day-card" onclick="selectDay('2026-11-14')">
             <span class="day-number">14/11</span>
             <span class="day-dest">BCN ➔ São Paulo</span>
-            <span class="day-badge">✈️ Voo LATAM</span>
+            <span class="day-badge">✈️ LATAM</span>
           </div>
         </div>
       </section>
 
-      <!-- DAY DETAILS & FILE LINKS -->
       <aside class="details-panel" id="detailsBox">
-        <h2 class="day-title" id="dTitle">26 de Outubro</h2>
-        <div class="day-subtitle" id="dSub">Barcelona • Museu & Arquitetura</div>
+        <h2 class="day-title" id="dTitle">Carregando...</h2>
+        <div class="day-subtitle" id="dSub"></div>
 
-        <div class="timeline" id="dTimeline">
-          <!-- Timeline items dynamically inserted -->
-        </div>
+        <div class="timeline" id="dTimeline"></div>
 
         <div class="files-section">
           <h3>📎 Vouchers & Documentos</h3>
-          <div class="files-list" id="dFiles">
-            <!-- Files buttons dynamically inserted -->
-          </div>
+          <div class="files-list" id="dFiles"></div>
         </div>
 
-        <div class="sketch-card" id="dSketch">
-          <!-- SVG Sketch dynamically updated -->
-        </div>
+        <div class="sketch-card" id="dSketch"></div>
       </aside>
     </div>
 
-    <!-- QUICK REFERENCE BAR -->
     <div class="quick-bar">
       <div class="quick-card">
         <h4>🚨 Telefones de Emergência</h4>
         <ul>
-          <li><strong>Central AIG Mastercard Black:</strong> +1-636-722-7111 (a cobrar)</li>
-          <li><strong>Espanha (Ligação Grátis):</strong> 900-97-1231</li>
-          <li><strong>Itália (Ligação Grátis):</strong> 800-870-866</li>
+          <li><strong>Central AIG Mastercard:</strong> +1-636-722-7111 (a cobrar)</li>
+          <li><strong>Espanha (Grátis):</strong> 900-97-1231</li>
+          <li><strong>Itália (Grátis):</strong> 800-870-866</li>
           <li><strong>Holanda:</strong> 0800-022-5821 | <strong>Bélgica:</strong> 080-1-5096</li>
         </ul>
       </div>
 
       <div class="quick-card">
-        <h4>🏨 Hospedagens Principais</h4>
-        <ul>
-          <li><strong>Andorra:</strong> Hotel de l'Isard (Check-in 27/10 14h)</li>
-          <li><strong>Amsterdã:</strong> ibis Budget City South (Check-in 29/10)</li>
-          <li><strong>Florença:</strong> Hotel S. Giorgio & Olimpic (05 a 09/11)</li>
-          <li><strong>Roma:</strong> Hotel Patria - Via Torino 36 (09 a 13/11)</li>
-        </ul>
+        <h4>📋 Apólices de Seguro Viagem</h4>
+        <p>Acesso rápido aos certificados de cobertura:</p>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-top:8px;">
+          <a class="file-btn" href="Seguro Viagem - Gustavo Rodrigues.pdf" target="_blank">
+            <span>🛡️ Seguro Viagem AIG - Gustavo</span>
+            <span class="badge">PDF</span>
+          </a>
+          <a class="file-btn" href="Seguro Viagem - Gabriel Gaspar.pdf" target="_blank">
+            <span>🛡️ Seguro Viagem AIG - Gabriel</span>
+            <span class="badge">PDF</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Dicionário com todas as informações dos dias, horários e arquivos dos vouchers
+    // DICIONÁRIO MAPEADO EXATAMENTE COM OS NOMES REAIS DOS FICHEIROS CARREGADOS NO GITHUB
     const tripData = {
       "2026-10-24": {
         title: "24 de Outubro (Sábado)",
@@ -629,16 +614,16 @@
           { time: "18:10", title: "Embarque Voo LA 8114", desc: "LATAM Linhas Aéreas direto para Barcelona (El Prat)." }
         ],
         files: [
-          { name: "Passagens Aéreas LATAM (São Paulo - Barcelona)", file: "Passagem LATAM SP-BCN.pdf", type: "Voo" },
-          { name: "Seguro Viagem MasterAssist - Gustavo", file: "Seguro AIG Gustavo.pdf", type: "Seguro" },
-          { name: "Seguro Viagem MasterAssist - Gabriel", file: "Seguro AIG Gabriel.pdf", type: "Seguro" }
+          { name: "Passagens Aéreas LATAM (SP - Barcelona)", file: "LATAM - Passagens SP - Barcelona.pdf", type: "Voo" },
+          { name: "Certificado de Elegibilidade - Gustavo", file: "Certificado de Elegibilidade - Gustavo Rodrigues.pdf", type: "Seguro" },
+          { name: "Certificado de Elegibilidade - Gabriel", file: "Certificado Elegibilidade- Gabriel Gaspar.pdf", type: "Seguro" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
             <path d="M20,65 L70,55 L130,25 L160,25 L145,55 L180,55 L190,65 L145,67 L100,85 L85,85 L95,67 Z" stroke-dasharray="2,2"/>
             <path d="M10,80 Q50,70 180,30" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
           </svg>
-          <div class="sketchcaption">Partida de São Paulo rumo à Europa</div>
+          <div class="sketch-caption">Partida de São Paulo rumo à Europa</div>
         `
       },
       "2026-10-25": {
@@ -650,7 +635,7 @@
           { time: "17:00", title: "Check-in Ten To Go Hostel", desc: "Carrer de Valladolid, 43. Descanso e caminhada pelo bairro." }
         ],
         files: [
-          { name: "Reserva Ten To Go Hostel Barcelona", file: "Ten To Go Hostel - Barcelona.pdf", type: "Hotel" }
+          { name: "Reserva Ten To Go Hostel Barcelona", file: "Booking - Hospedagem - Ten To Go Hostel - Barcelona.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -669,12 +654,9 @@
           { time: "10:00", title: "Ingresso Sagrada Família + Torre", desc: "Visita ao interior e subida à Torre da Fachada da Natividade." },
           { time: "14:00", title: "Tarde livre pelo Bairro Gótico e orla", desc: "Parc Güell ou passeio pelas Ramblas." }
         ],
-        files: [
-          { name: "Voucher Sagrada Família (Torre Natividade)", file: "Sagrada Familia - Barcelona.pdf", type: "Ingresso" }
-        ],
+        files: [],
         sketch: `
           <svg viewBox="0 0 200 110">
-            <!-- Sketch Sagrada Família -->
             <path d="M60,95 L60,35 L70,15 L80,35 L80,95 M120,95 L120,35 L130,15 L140,35 L140,95"/>
             <path d="M80,45 L120,45 M80,65 L120,65 M80,85 L120,85"/>
             <path d="M90,30 L100,10 L110,30 L110,95 L90,95 Z"/>
@@ -694,15 +676,14 @@
           { time: "14:00", title: "Check-in Hotel de L'Isard", desc: "Avenida Meritxell, 36. Quarto Triplo Superior." }
         ],
         files: [
-          { name: "Bilhete Directbus - Gustavo (Ida)", file: "Passagem Ida Andorra - Gustavo.pdf", type: "Ônibus" },
-          { name: "Bilhete Directbus - Gabriel (Ida)", file: "Passagem Ida Andorra - Gabriel.pdf", type: "Ônibus" },
-          { name: "Bilhete Directbus - Jéssica (Ida)", file: "Passagem Ida Andorra - Jéssica Siqueira.pdf", type: "Ônibus" },
-          { name: "Reserva Caldea SPA Premium", file: "Voucher Caldea SPA.pdf", type: "Ingresso" },
-          { name: "Reserva Hotel de L'Isard", file: "Hotel de L'Isard - Andorra.pdf", type: "Hotel" }
+          { name: "Passagem Ida Andorra - Gustavo", file: "Passagem Ida Andorra - Gustavo Rodrigues.pdf", type: "Ônibus" },
+          { name: "Passagem Ida Andorra - Gabriel", file: "Passagem Ida Andorra - Gabriel Gaspar.pdf", type: "Ônibus" },
+          { name: "Passagem Ida Andorra - Jéssica", file: "Passagem Ida Andorra - Jéssica Siqueira.pdf", type: "Ônibus" },
+          { name: "Reserva Caldea SPA Premium", file: "Caldea - Ingressos SPA - Andorra-La-Vella.pdf", type: "Ingresso" },
+          { name: "Hospedagem Hotel De L'Isards", file: "Booking - Hospedagem Hotel De l'Isards - Andorra-La-Vella.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Montanhas dos Pirineus e Caldea -->
             <path d="M10,85 L50,30 L85,70 L130,20 L175,85 Z" stroke-width="1.8"/>
             <path d="M110,85 L125,50 L140,85 Z"/>
             <path d="M60,65 Q80,55 100,65 Q120,75 140,65" stroke-dasharray="2,2"/>
@@ -719,9 +700,9 @@
           { time: "14:00", title: "Tarde e Noite em Barcelona", desc: "Passeio final pela cidade e tapas catalãs." }
         ],
         files: [
-          { name: "Bilhete Directbus - Gustavo (Volta)", file: "Passagem Volta Andorra - Gustavo.pdf", type: "Ônibus" },
-          { name: "Bilhete Directbus - Gabriel (Volta)", file: "Passagem Volta Andorra - Gabriel.pdf", type: "Ônibus" },
-          { name: "Bilhete Directbus - Jéssica (Volta)", file: "Passagem Volta Andorra - Jéssica Siqueira.pdf", type: "Ônibus" }
+          { name: "Passagem Volta Andorra - Gustavo", file: "Passagem Volta Andorra - Gustavo Rodrigues.pdf", type: "Ônibus" },
+          { name: "Passagem Volta Andorra - Gabriel", file: "Passagem Volta Andorra - Gabriel Gaspar.pdf", type: "Ônibus" },
+          { name: "Passagem Volta Andorra - Jéssica", file: "Passagem Volta Andorra - Jéssica Siqueira.pdf", type: "Ônibus" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -742,8 +723,8 @@
           { time: "22:30", title: "Check-in ibis Budget City South", desc: "Prof J H Bavincklaan 1, Amstelveen (Amsterdam South)." }
         ],
         files: [
-          { name: "Fatura & Bilhete KLM Barcelona-Amsterdã", file: "KLM - Fatura Compra Passagens Barcelona - Amsterdã.pdf", type: "Voo" },
-          { name: "Reserva ibis budget Amsterdam", file: "ibis Budget Amsterdam City South.pdf", type: "Hotel" }
+          { name: "Fatura Compra Passagens KLM (BCN - AMS)", file: "KLM - Fatura Compra Passagens Barcelona - Amsterdã.pdf", type: "Voo" },
+          { name: "Reserva ibis budget Amsterdam", file: "Booking - Hospedagem Ibis Budget City South - Amsterdã.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -761,11 +742,11 @@
         subtitle: "Amsterdã • Anne Frank",
         timeline: [
           { time: "09:45", title: "Caminhada pelo bairro Jordaan", desc: "Canais históricos e pontes tradicionais." },
-          { time: "10:15", title: "Casa de Anne Frank (Horário Marcado)", desc: "Janela de entrada: 10:15 - 10:30. Ingressos salvos no smartphone." },
+          { time: "10:15", title: "Casa de Anne Frank (Horário Marcado)", desc: "Janela de entrada: 10:15 - 10:30." },
           { time: "14:00", title: "Passeio de barco ou Museu Van Gogh", desc: "Explorar a Praça dos Museus (Museumplein)." }
         ],
         files: [
-          { name: "Ingresso Casa de Anne Frank (10:15)", file: "Casa Anne Frank - Gustavo.pdf", type: "Ingresso" }
+          { name: "Ingressos Casa de Anne Frank", file: "Ingressos - Anne Frank House - 30102026.pdf", type: "Ingresso" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -804,8 +785,8 @@
           { time: "14:00", title: "Check-in a&o Brussels Centrum", desc: "Blvd. du Roi Albert II, 44. Instalação e passeio até a Grand-Place." }
         ],
         files: [
-          { name: "Passagem Trem NS Eurocity Amsterdã-Bruxelas", file: "Trem NS Amsterdã - Bruxelas.pdf", type: "Trem" },
-          { name: "Reserva a&o Brussels Centrum", file: "a&o Brussels Centrum - Bruxelas.pdf", type: "Hotel" }
+          { name: "Trem Eurocity Amsterdã - Bruxelas", file: "Eurocity - Trem Amsterdã - Bruxelas.pdf", type: "Trem" },
+          { name: "Hospedagem a&o Brussels Centrum", file: "Decolar - Hospedagem a&o Brussels Centrum - Bruxelas.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -843,9 +824,9 @@
           { time: "14:30", title: "Check-in Ostello Bello Milano Centrale", desc: "Via Roberto Lepetit 33, a poucos passos da Milano Centrale." }
         ],
         files: [
-          { name: "Bilhete ITA Airways AZ151 - Gustavo", file: "Reserva ITA Airways - Gustavo Rodrigues - Bruxelas - Milão.pdf", type: "Voo" },
-          { name: "Bilhete ITA Airways AZ151 - Gabriel", file: "Reserva ITA Airways - Gabriel Gaspar - Bruxelas - Milão.pdf", type: "Voo" },
-          { name: "Reserva Ostello Bello Milano Centrale", file: "Ostello Bello Milano Centrale.pdf", type: "Hotel" }
+          { name: "Voo ITA Airways AZ151 - Gustavo", file: "Reserva ITA Airways - Gustavo Rodrigues - Bruxelas - Milão.pdf", type: "Voo" },
+          { name: "Voo ITA Airways AZ151 - Gabriel", file: "Reserva ITA Airways - Gabriel Gaspar - Bruxelas - Milão.pdf", type: "Voo" },
+          { name: "Hospedagem Ostello Bello Milano", file: "Hospedagem - Booking - Ostello Bello Milano Centrale.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -868,13 +849,11 @@
           { time: "20:08", title: "Trem Regionale 2843 (Tirano ➔ Milano)", desc: "Partida de Tirano. Chegada a Milano Centrale às 22:40." }
         ],
         files: [
-          { name: "Bilhete Trenord Milão ➔ Tirano (06:20)", file: "Trem Trenord Milao Tirano.pdf", type: "Trem" },
-          { name: "Bilhete Bernina Express RhB (Alpes Suíços)", file: "Bernina Express - Gabriel & Gustavo.pdf", type: "Trem" },
-          { name: "Bilhete Trenord Tirano ➔ Milão (20:08)", file: "Trem Trenord Tirano Milao.pdf", type: "Trem" }
+          { name: "Trem Regionale Milão - Tirano (Ida e Volta)", file: "Trenord - Regionale - Trem Milão - Tirano - Milão.pdf", type: "Trem" },
+          { name: "Tickets Bernina Express (St. Moritz)", file: "Tickets Bernina Express 041110.pdf", type: "Trem" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Viaduto espiral de Brusio e Alpes -->
             <path d="M15,50 L55,15 L95,45 L145,10 L185,55" stroke-width="1.8"/>
             <path d="M50,85 C60,60 140,60 150,85" stroke-width="2"/>
             <path d="M80,85 L80,72 M100,85 L100,68 M120,85 L120,72"/>
@@ -892,11 +871,11 @@
           { time: "14:00", title: "Check-in Hotel S. Giorgio & Olimpic", desc: "Via S. Antonino 3, a 150m da estação ferroviária." }
         ],
         files: [
-          { name: "Reserva Hotel S. Giorgio & Olimpic Florença", file: "Hotel S. Giorgio & Olimpic Florença.pdf", type: "Hotel" }
+          { name: "Trem Frecciarossa Milão - Florença", file: "Frecciarossa - Trem Milão - Florença.pdf", type: "Trem" },
+          { name: "Hospedagem Hotel San Giorgio Florença", file: "Booking - Hospedagem Hotel San Giorgio - Florença.pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Cúpula de Brunelleschi -->
             <path d="M70,90 L70,55 Q100,15 130,55 L130,90 Z" stroke-width="2"/>
             <line x1="100" y1="15" x2="100" y2="5"/>
             <circle cx="100" cy="5" r="2.5"/>
@@ -914,7 +893,7 @@
           { time: "14:30", title: "Ponte Vecchio e Piazzale Michelangelo", desc: "Pôr do sol panorâmico sobre Florença e Rio Arno." }
         ],
         files: [
-          { name: "Ingresso Galleria dell'Accademia - Gustavo & Gabriel", file: "Galleria dell'Accademia - Florença.pdf", type: "Ingresso" }
+          { name: "Ingressos Galleria Dell'Accademia", file: "Galleria Dell'Academia - Ingressos - Florença.pdf", type: "Ingresso" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -933,10 +912,11 @@
           { time: "13:00", title: "Trem Pisa ➔ Lucca", desc: "Passeio pelas muralhas renascentistas e centro histórico." },
           { time: "18:30", title: "Trem de retorno para Florença", desc: "Jantar na Piazza della Signoria." }
         ],
-        files: [],
+        files: [
+          { name: "Passagens Trem Florença - Pisa - Lucca", file: "Trenitalia - Trem - Florença - Pisa - Luca - Florença.pdf", type: "Trem" }
+        ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Torre de Pisa inclinada -->
             <g transform="rotate(7 100 80)">
               <rect x="90" y="25" width="22" height="60" rx="2"/>
               <line x1="90" y1="35" x2="112" y2="35"/><line x1="90" y1="45" x2="112" y2="45"/><line x1="90" y1="55" x2="112" y2="55"/><line x1="90" y1="65" x2="112" y2="65"/><line x1="90" y1="75" x2="112" y2="75"/>
@@ -972,7 +952,8 @@
           { time: "14:00", title: "Check-in Hotel Patria", desc: "Via Torino 36 (a 5 minutos da estação Termini)." }
         ],
         files: [
-          { name: "Voucher Decolar Hotel Patria Roma", file: "Roma - Hotel Pátria.pdf.pdf", type: "Hotel" }
+          { name: "Trem Frecciarossa Florença - Roma", file: "Frecciarossa - Trem Florença-Roma.pdf", type: "Trem" },
+          { name: "Voucher Hotel Patria Roma", file: "Roma - Hotel Pátria.pdf (1).pdf", type: "Hotel" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -989,15 +970,13 @@
         timeline: [
           { time: "08:30", title: "Fontana di Trevi", desc: "Moeda na fonte antes das multidões matinais." },
           { time: "09:45", title: "Coliseu (Entrada Reservada)", desc: "Acesso com bilhete eletrônico Valadier. Visita Fórum & Palatino inclusa 24h." },
-          { time: "14:30", title: "Panteão & Piazza Navona", desc: "Cúpula com oclulus e praças do centro histórico." }
+          { time: "14:30", title: "Panteão & Piazza Navona", desc: "Cúpula com oculus e praças do centro histórico." }
         ],
         files: [
-          { name: "Bilhete Oficial Coliseu - Gustavo", file: "Coliseu - Gustavo.pdf", type: "Ingresso" },
-          { name: "Bilhete Oficial Coliseu - Gabriel", file: "Coliseu - Gabriel.pdf", type: "Ingresso" }
+          { name: "Ingressos Coliseu, Fórum e Palatino", file: "Ingressos Coliseo e Palatino (1)...pdf", type: "Ingresso" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Sketch do Coliseu -->
             <ellipse cx="100" cy="55" rx="70" ry="32" stroke-dasharray="3,2"/>
             <path d="M30,55 L30,80 Q100,100 170,80 L170,55" stroke-width="2"/>
             <path d="M45,60 L45,78 M65,63 L65,83 M85,65 L85,85 M105,65 L105,85 M125,64 L125,84 M145,61 L145,80"/>
@@ -1011,15 +990,14 @@
         subtitle: "Vaticano & Capela Sistina",
         timeline: [
           { time: "09:00", title: "Audiência Geral na Praça São Pedro", desc: "Presença na Praça de São Pedro." },
-          { time: "10:30", title: "Museus do Vaticano & Capela Sistina", desc: "Entrada pelo Corridoio 1 / Passageway 1. Código 2L2NFHU119XTF1U1B." },
+          { time: "10:30", title: "Museus do Vaticano & Capela Sistina", desc: "Entrada pelo Corridoio 1. Código 2L2NFHU119XTF1U1B." },
           { time: "15:00", title: "Basílica de São Pedro & Castel Sant'Angelo", desc: "Passeio pela Via della Conciliazione e Ponte Sant'Angelo." }
         ],
         files: [
-          { name: "Ingressos Museus Vaticani & Capela Sistina", file: "Museus Vaticanos - Gustavo e Gabriel.pdf", type: "Ingresso" }
+          { name: "Ingressos Museus Vaticano e Capela Sistina", file: "Ingressos - Museus do Vaticano e Capela Sistina.pdf", type: "Ingresso" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
-            <!-- Cúpula de São Pedro -->
             <path d="M80,85 L80,50 Q100,20 120,50 L120,85 Z" stroke-width="2"/>
             <line x1="100" y1="20" x2="100" y2="8"/><line x1="96" y1="12" x2="104" y2="12"/>
             <path d="M40,85 Q65,70 80,85 M120,85 Q135,70 160,85" stroke-dasharray="2,2"/>
@@ -1049,10 +1027,11 @@
         subtitle: "Roma ➔ Barcelona",
         timeline: [
           { time: "12:00", title: "Check-out Hotel Patria Roma", desc: "Almoço leve e deslocamento ao aeroporto Fiumicino." },
-          { time: "16:00", title: "Voo IB 5341 / Vueling (Roma ➔ Barcelona)", desc: "Voo de retorno para Barcelona. Noite no Ten to Go ou aeroporto." }
+          { time: "16:00", title: "Voo Vueling / Iberia (Roma ➔ Barcelona)", desc: "Voo de retorno para Barcelona. Noite no Ten to Go ou aeroporto." }
         ],
         files: [
-          { name: "Passagens Aéreas Roma - Barcelona", file: "Passagem Roma BCN.pdf", type: "Voo" }
+          { name: "Passagens Vueling Roma - Barcelona", file: "VUELING - ROMA-BARCELONA - Gabriel Gaspar.pdf", type: "Voo" },
+          { name: "Passagens Vueling Roma - Barcelona", file: "VUELING - ROMA-BARCELONA - Gustavo Rodrigues.pdf", type: "Voo" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -1070,7 +1049,7 @@
           { time: "19:00", title: "Pouso no Aeroporto de Guarulhos (SP)", desc: "Chegada em casa!" }
         ],
         files: [
-          { name: "Passagem de Volta LATAM LA 8115", file: "Passagem LATAM SP-BCN.pdf", type: "Voo" }
+          { name: "Passagens Aéreas LATAM (Volta ao Brasil)", file: "LATAM - Passagens SP - Barcelona.pdf", type: "Voo" }
         ],
         sketch: `
           <svg viewBox="0 0 200 100">
@@ -1087,16 +1066,13 @@
       const data = tripData[dateStr];
       if (!data) return;
 
-      // Update active card
       document.querySelectorAll('.day-card').forEach(c => c.classList.remove('active'));
       const activeEl = Array.from(document.querySelectorAll('.day-card')).find(c => c.textContent.includes(dateStr.split('-').slice(1).reverse().join('/')));
       if (activeEl) activeEl.classList.add('active');
 
-      // Update Details Panel
       document.getElementById('dTitle').innerText = data.title;
       document.getElementById('dSub').innerText = data.subtitle;
 
-      // Update Timeline
       const tBox = document.getElementById('dTimeline');
       tBox.innerHTML = '';
       data.timeline.forEach(item => {
@@ -1112,15 +1088,14 @@
         tBox.appendChild(div);
       });
 
-      // Update Files
       const fBox = document.getElementById('dFiles');
       fBox.innerHTML = '';
       if (data.files && data.files.length > 0) {
         data.files.forEach(f => {
           const a = document.createElement('a');
           a.className = 'file-btn';
-          // Link relativo: se os PDFs estiverem na mesma pasta no Google Drive/computador, eles abrem direto
-          a.href = f.file;
+          // encodeURI garante compatibilidade com acentos e espaços nos nomes dos ficheiros
+          a.href = encodeURI(f.file);
           a.target = '_blank';
           a.innerHTML = `
             <span>📄 ${f.name}</span>
@@ -1129,14 +1104,13 @@
           fBox.appendChild(a);
         });
       } else {
-        fBox.innerHTML = '<div style="font-size: 0.85rem; color: #888; font-style: italic;">Nenhum voucher com horário obrigatório para este dia.</div>';
+        fBox.innerHTML = '<div style="font-size: 0.85rem; color: #888; font-style: italic;">Nenhum comprovativo anexado para este dia.</div>';
       }
 
-      // Update Sketch
       document.getElementById('dSketch').innerHTML = data.sketch;
     }
 
-    // Carregar o primeiro dia por padrão
+    // Abre o primeiro dia da viagem por defeito
     window.onload = () => {
       selectDay('2026-10-24');
     };
