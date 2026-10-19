@@ -98,7 +98,6 @@
       font-weight: 500;
     }
 
-    /* NAV TABS RESPONSIVAS */
     .nav-tabs {
       display: flex;
       background: rgba(255, 255, 255, 0.08);
@@ -138,16 +137,9 @@
       box-shadow: 0 4px 10px rgba(0, 180, 216, 0.35);
     }
 
-    /* AJUSTE FINO MOBILE DO MENU */
     @media (max-width: 680px) {
-      .top-nav {
-        padding: 14px 12px;
-      }
-      .brand {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-      }
+      .top-nav { padding: 14px 12px; }
+      .brand { width: 100%; justify-content: center; text-align: center; }
       .nav-tabs {
         width: 100%;
         display: grid;
@@ -164,7 +156,6 @@
       }
     }
 
-    /* VIEW CONTENT */
     .view-content {
       display: none;
       padding: 20px 14px;
@@ -226,7 +217,6 @@
       font-weight: 600;
     }
 
-    /* COUNTDOWN */
     .countdown-grid {
       display: flex;
       justify-content: center;
@@ -310,7 +300,6 @@
       font-weight: 800;
     }
 
-    /* STATS ROW */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -357,7 +346,7 @@
     /* CALENDAR RESPONSIVE LAYOUT */
     .calendar-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.8fr) minmax(300px, 1fr);
+      grid-template-columns: minmax(0, 1.8fr) minmax(320px, 1fr);
       gap: 18px;
       align-items: start;
       width: 100%;
@@ -407,9 +396,7 @@
     }
 
     @media (min-width: 961px) {
-      .cal-grid-wrapper {
-        min-width: 100%;
-      }
+      .cal-grid-wrapper { min-width: 100%; }
     }
 
     .cal-grid {
@@ -527,7 +514,7 @@
     .timeline-wrap {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 16px;
     }
 
@@ -555,7 +542,7 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 6px 9px;
+      padding: 8px 10px;
       flex: 1;
       font-size: 0.8rem;
     }
@@ -565,6 +552,30 @@
       color: var(--navy-main);
       font-size: 0.84rem;
       margin-bottom: 2px;
+    }
+
+    /* MAPS ACTION BUTTON IN TIMELINE */
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 4px 9px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .map-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      transform: translateY(-1px);
     }
 
     .docs-section h4 {
@@ -1228,13 +1239,24 @@
     countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
 
+    // BASE DE DADOS DOS DIAS COM LINKS DE ROTA DO GOOGLE MAPS
     const tripDays = {
       "2026-10-24": {
         title: "24 de Outubro (Sábado)",
         subtitle: "São Paulo ➔ Barcelona",
         timeline: [
-          { time: "15:00", title: "Apresentação Aeroporto GRU", desc: "Terminal internacional de Guarulhos para despacho e embarque." },
-          { time: "18:10", title: "Embarque Voo LA 8114", desc: "LATAM Airlines direto para Barcelona (El Prat)." }
+          { 
+            time: "15:00", 
+            title: "Apresentação Aeroporto GRU", 
+            desc: "Terminal 3 Internacional de Guarulhos para despacho e embarque.",
+            mapQuery: "Aeroporto Internacional de Guarulhos, Terminal 3" 
+          },
+          { 
+            time: "18:10", 
+            title: "Embarque Voo LA 8114", 
+            desc: "LATAM Airlines direto para Barcelona (El Prat).",
+            mapQuery: "Aeroporto Internacional de Guarulhos" 
+          }
         ],
         files: [
           { name: "Passagens LATAM (SP - Barcelona - SP)", file: "LATAM - Passagens SP - Barcelona - SP (1).pdf", type: "Voo" },
@@ -1253,9 +1275,18 @@
         title: "25 de Outubro (Domingo)",
         subtitle: "Chegada em Barcelona",
         timeline: [
-          { time: "08:40", title: "Pouso no Aeroporto El Prat (BCN)", desc: "Desembarque, imigração e retirada de bagagens." },
-          { time: "10:00", title: "Translado até Sants-Montjuïc", desc: "Deslocamento de metrô ou táxi até a acomodação." },
-          { time: "17:00", title: "Check-in Ten To Go Hostel", desc: "Carrer de Valladolid 43. Noite livre no bairro de Sants." }
+          { 
+            time: "08:40", 
+            title: "Pouso no Aeroporto El Prat (BCN)", 
+            desc: "Desembarque, imigração e retirada de bagagens.",
+            mapQuery: "Aeropuerto Josep Tarradellas Barcelona-El Prat"
+          },
+          { 
+            time: "17:00", 
+            title: "Check-in Ten To Go Hostel", 
+            desc: "Carrer de Valladolid 43, Sants-Montjuïc. Noite livre no bairro de Sants.",
+            mapQuery: "Ten To Go Hostel, Carrer de Valladolid 43, Barcelona" 
+          }
         ],
         files: [
           { name: "Reserva Ten To Go Hostel", file: "Booking - Hospedagem - Ten To Go Hostel - Barcelona.pdf", type: "Hotel" }
@@ -1272,9 +1303,18 @@
         title: "26 de Outubro (Segunda-feira)",
         subtitle: "Barcelona • Sagrada Família",
         timeline: [
-          { time: "09:30", title: "Chegada à Basílica", desc: "Apresentar voucher de acesso com hora marcada." },
-          { time: "10:00", title: "Sagrada Família + Torre Natividade", desc: "Visita monumental à obra-prima de Antoni Gaudí." },
-          { time: "14:00", title: "Bairro Gótico & La Rambla", desc: "Caminhada pelo centro histórico e orla de Barceloneta." }
+          { 
+            time: "10:00", 
+            title: "Sagrada Família + Torre Natividade", 
+            desc: "Visita monumental à obra-prima de Antoni Gaudí.",
+            mapQuery: "Basílica de la Sagrada Família, Barcelona"
+          },
+          { 
+            time: "14:00", 
+            title: "Bairro Gótico & La Rambla", 
+            desc: "Caminhada pelo centro histórico e orla de Barceloneta.",
+            mapQuery: "Plaça Reial, Barcelona"
+          }
         ],
         files: [],
         sketch: `
@@ -1290,10 +1330,30 @@
         title: "27 de Outubro (Terça-feira)",
         subtitle: "Barcelona ➔ Andorra La Vella",
         timeline: [
-          { time: "06:15", title: "Ônibus Directbus (Estação Sants)", desc: "Saída de Barcelona para Andorra (Assentos 1, 72, 73)." },
-          { time: "09:15", title: "Chegada a Andorra La Vella", desc: "Estação central de ônibus de Andorra." },
-          { time: "11:00", title: "Caldea SPA Premium (4 horas)", desc: "Sessão relaxante nas piscinas termais dos Pirineus." },
-          { time: "14:00", title: "Check-in Hotel De L'Isard", desc: "Avenida Meritxell 36. Quarto Triplo Superior." }
+          { 
+            time: "06:15", 
+            title: "Ônibus Directbus (Estação Sants)", 
+            desc: "Saída da Estação de Autobuses de Sants - Carrer Viriat (Assentos 1, 72, 73).",
+            mapQuery: "Estación de Autobuses de Barcelona Sants, Carrer de Viriat"
+          },
+          { 
+            time: "09:15", 
+            title: "Chegada a Andorra La Vella", 
+            desc: "Estação Central de Ônibus de Andorra (C/ de la Curia).",
+            mapQuery: "Estació Nacional d'Autobusos d'Andorra"
+          },
+          { 
+            time: "11:00", 
+            title: "Caldea SPA Premium (4 horas)", 
+            desc: "Sessão relaxante nas piscinas termais dos Pirineus.",
+            mapQuery: "Caldea, Parc de la Mola 10, Escaldes-Engordany, Andorra"
+          },
+          { 
+            time: "14:00", 
+            title: "Check-in Hotel De L'Isard", 
+            desc: "Avenida Meritxell 36. Quarto Triplo Superior.",
+            mapQuery: "Hotel de l'Isard, Av. Meritxell 36, Andorra la Vella"
+          }
         ],
         files: [
           { name: "Directbus Ida Andorra: Gustavo", file: "Passagem Ida Andorra - Gustavo Rodrigues.pdf", type: "Ônibus" },
@@ -1314,9 +1374,24 @@
         title: "28 de Outubro (Quarta-feira)",
         subtitle: "Andorra La Vella ➔ Barcelona",
         timeline: [
-          { time: "10:00", title: "Check-out Hotel De L'Isard", desc: "Compras na Av. Meritxell e caminhada." },
-          { time: "10:45", title: "Ônibus Directbus de Retorno", desc: "Partida de Andorra rumo a Barcelona Sants (Chegada 13:45)." },
-          { time: "15:00", title: "Tarde livre em Barcelona", desc: "Passeio pelo Parc de la Ciutadella e tapas." }
+          { 
+            time: "10:00", 
+            title: "Check-out Hotel De L'Isard", 
+            desc: "Compras na Av. Meritxell e caminhada.",
+            mapQuery: "Hotel de l'Isard, Av. Meritxell 36, Andorra la Vella"
+          },
+          { 
+            time: "10:45", 
+            title: "Ônibus Directbus de Retorno", 
+            desc: "Partida de Andorra rumo a Barcelona Sants (Chegada 13:45).",
+            mapQuery: "Estació Nacional d'Autobusos d'Andorra"
+          },
+          { 
+            time: "15:00", 
+            title: "Tarde livre em Barcelona", 
+            desc: "Passeio pelo Parc de la Ciutadella e tapas.",
+            mapQuery: "Parc de la Ciutadella, Barcelona"
+          }
         ],
         files: [
           { name: "Directbus Volta Andorra: Gustavo", file: "Passagem Volta Andorra - Gustavo Rodrigues.pdf", type: "Ônibus" },
@@ -1335,9 +1410,18 @@
         title: "29 de Outubro (Quinta-feira)",
         subtitle: "Barcelona ➔ Amsterdã",
         timeline: [
-          { time: "16:30", title: "Deslocamento ao Aeroporto El Prat", desc: "Apresentação para embarque do voo KLM." },
-          { time: "19:00", title: "Voo KL 1520 (BCN ➔ AMS)", desc: "Voo KLM Royal Dutch Airlines com destino a Schiphol." },
-          { time: "22:30", title: "Check-in ibis Budget City South", desc: "Prof J H Bavincklaan 1, Amstelveen." }
+          { 
+            time: "16:30", 
+            title: "Deslocamento Aeroporto El Prat", 
+            desc: "Embarque voo KL 1520 com destino a Schiphol.",
+            mapQuery: "Aeropuerto Josep Tarradellas Barcelona-El Prat, Terminal 1"
+          },
+          { 
+            time: "22:30", 
+            title: "Check-in ibis Budget City South", 
+            desc: "Prof J H Bavincklaan 1, 1183 AT Amstelveen.",
+            mapQuery: "ibis budget Amsterdam City South, Prof. J.H. Bavincklaan 1, Amstelveen"
+          }
         ],
         files: [
           { name: "Fatura Compra Passagens KLM", file: "KLM - Fatura Compra Passagens Barcelona - Amsterdã.pdf", type: "Voo" },
@@ -1356,9 +1440,18 @@
         title: "30 de Outubro (Sexta-feira)",
         subtitle: "Amsterdã • Anne Frank",
         timeline: [
-          { time: "09:30", title: "Caminhada pelos canais do Jordaan", desc: "Passeio clássico entre pontes e flores." },
-          { time: "10:15", title: "Casa de Anne Frank (Horário Marcado)", desc: "Entrada prioritária: 10:15 - 10:30." },
-          { time: "14:00", title: "Museumplein & Rijksmuseum", desc: "Tarde cultural na praça dos grandes museus." }
+          { 
+            time: "10:15", 
+            title: "Casa de Anne Frank (Horário Marcado)", 
+            desc: "Westermarkt 20, 1016 DK Amsterdam. Janela de entrada: 10:15 - 10:30.",
+            mapQuery: "Anne Frank House, Westermarkt 20, Amsterdam"
+          },
+          { 
+            time: "14:00", 
+            title: "Museumplein & Canais", 
+            desc: "Tarde cultural na praça do Rijksmuseum e Van Gogh.",
+            mapQuery: "Museumplein, Amsterdam"
+          }
         ],
         files: [
           { name: "Ingressos Casa de Anne Frank", file: "Ingressos - Anne Frank House - 3010.pdf", type: "Ingresso" }
@@ -1376,8 +1469,18 @@
         title: "31 de Outubro (Sábado)",
         subtitle: "Amsterdã Livre",
         timeline: [
-          { time: "10:00", title: "Passeio de bicicleta no Vondelpark", desc: "Experiência típica holandesa sobre duas rodas." },
-          { time: "14:30", title: "Mercado Albert Cuypmarkt & De Pijp", desc: "Comer stroopwafels quentes e queijos artesanais." }
+          { 
+            time: "10:00", 
+            title: "Vondelpark & Passeio de Bicicleta", 
+            desc: "Experiência típica holandesa pelas alamedas arborizadas.",
+            mapQuery: "Vondelpark, Amsterdam"
+          },
+          { 
+            time: "14:30", 
+            title: "Mercado Albert Cuypmarkt & De Pijp", 
+            desc: "Comer stroopwafels quentes e provar queijos artesanais.",
+            mapQuery: "Albert Cuyp Market, Amsterdam"
+          }
         ],
         files: [],
         sketch: `
@@ -1392,9 +1495,18 @@
         title: "01 de Novembro (Domingo)",
         subtitle: "Amsterdã ➔ Bruxelas",
         timeline: [
-          { time: "09:00", title: "Check-out ibis Budget South", desc: "Deslocamento à estação Amsterdam Centraal." },
-          { time: "10:30", title: "Trem Eurocity (AMS ➔ Bruxelas)", desc: "Viagem de trem panorâmica entre Holanda e Bélgica." },
-          { time: "14:00", title: "Check-in a&o Brussels Centrum", desc: "Blvd. du Roi Albert II 44. Caminhada até a Grand-Place." }
+          { 
+            time: "10:30", 
+            title: "Trem Eurocity (Amsterdam Centraal)", 
+            desc: "Embarque na estação central com destino a Bruxelles-Midi.",
+            mapQuery: "Amsterdam Centraal Station"
+          },
+          { 
+            time: "14:00", 
+            title: "Check-in a&o Brussels Centrum", 
+            desc: "Blvd du Roi Albert II 44, Bruxelas.",
+            mapQuery: "a&o Brussels Centrum, Boulevard du Roi Albert II 44, Bruxelles"
+          }
         ],
         files: [
           { name: "Trem Eurocity Amsterdã - Bruxelas", file: "Eurocity - Trem Amsterdã - Bruxelas (OMIO) (1).pdf", type: "Trem" },
@@ -1412,8 +1524,18 @@
         title: "02 de Novembro (Segunda-feira)",
         subtitle: "Bruxelas",
         timeline: [
-          { time: "09:30", title: "Grand-Place e Manneken Pis", desc: "Centro histórico e Casas das Guildas flamengas." },
-          { time: "14:00", title: "Atomium ou Parque do Cinquentenário", desc: "Waffles de Liège, batatas fritas e chocolates belgas." }
+          { 
+            time: "09:30", 
+            title: "Grand-Place e Manneken Pis", 
+            desc: "Centro histórico e Casas das Guildas flamengas.",
+            mapQuery: "Grand-Place, Bruxelles"
+          },
+          { 
+            time: "14:00", 
+            title: "Atomium & Mini-Europe", 
+            desc: "Monumento icônico e degustação de chocolates belgas.",
+            mapQuery: "Atomium, Square de l'Atomium, Bruxelles"
+          }
         ],
         files: [],
         sketch: `
@@ -1428,9 +1550,24 @@
         title: "03 de Novembro (Terça-feira)",
         subtitle: "Bruxelas ➔ Milão",
         timeline: [
-          { time: "07:00", title: "Check-out a&o Brussels & Ida ao Aeroporto", desc: "Deslocamento ao Brussels Airport (BRU)." },
-          { time: "09:25", title: "Voo ITA Airways AZ151 (BRU ➔ LIN)", desc: "Decolagem às 09:25. Pouso em Milão Linate às 10:50." },
-          { time: "14:30", title: "Check-in Ostello Bello Milano Centrale", desc: "Via Roberto Lepetit 33, ao lado da Milano Centrale." }
+          { 
+            time: "07:30", 
+            title: "Deslocamento ao Aeroporto BRU", 
+            desc: "Embarque no Voo ITA Airways AZ151 às 09:25.",
+            mapQuery: "Brussels Airport, Zaventem"
+          },
+          { 
+            time: "10:50", 
+            title: "Pouso em Milão Linate (LIN)", 
+            desc: "Translado até a região da estação central de Milão.",
+            mapQuery: "Milano Linate Airport"
+          },
+          { 
+            time: "14:30", 
+            title: "Check-in Ostello Bello Milano Centrale", 
+            desc: "Via Roberto Lepetit 33, a poucos metros da estação central.",
+            mapQuery: "Ostello Bello Milano Centrale, Via Roberto Lepetit 33, Milano"
+          }
         ],
         files: [
           { name: "Voo ITA Airways AZ151: Gustavo", file: "Reserva ITA Airways - Gustavo Rodrigues - Bruxelas - Milão.pdf", type: "Voo" },
@@ -1449,11 +1586,30 @@
         title: "04 de Novembro (Quarta-feira)",
         subtitle: "Milão ➔ Bernina Express (Alpes) ➔ Milão",
         timeline: [
-          { time: "06:20", title: "Trem Regionale 2812 (Milano ➔ Tirano)", desc: "Partida da Milano Centrale. Chegada em Tirano às 08:52." },
-          { time: "09:41", title: "Bernina Express (Tirano ➔ St. Moritz)", desc: "Ferrovia panorâmica histórica pelos Alpes Suíços." },
-          { time: "12:30", title: "Tarde em St. Moritz (Suíça)", desc: "Passeio pelo lago alpino e centro histórico suíço." },
-          { time: "16:00", title: "Trem St. Moritz ➔ Tirano", desc: "Descida panorâmica dos Alpes até a fronteira italiana." },
-          { time: "20:08", title: "Trem Regionale 2843 (Tirano ➔ Milano)", desc: "Chegada a Milano Centrale às 22:40." }
+          { 
+            time: "06:20", 
+            title: "Trem Regionale 2812 (Milano Centrale)", 
+            desc: "Partida de Milão até Tirano (chegada 08:52).",
+            mapQuery: "Milano Centrale Railway Station"
+          },
+          { 
+            time: "09:41", 
+            title: "Bernina Express (Tirano ➔ St. Moritz)", 
+            desc: "Estação de Tirano (RhB) para a travessia panorâmica dos Alpes Suíços.",
+            mapQuery: "Tirano RhB Railway Station, Piazza delle Stazioni, Tirano"
+          },
+          { 
+            time: "12:30", 
+            title: "Tarde em St. Moritz (Suíça)", 
+            desc: "Passeio pelo lago alpino e centro histórico suíço.",
+            mapQuery: "Bahnhof St. Moritz, Plazza da la Staziun, St. Moritz, Switzerland"
+          },
+          { 
+            time: "20:08", 
+            title: "Trem Retorno Tirano ➔ Milano Centrale", 
+            desc: "Trem Regionale 2843 com chegada a Milão às 22:40.",
+            mapQuery: "Stazione Ferroviaria di Tirano"
+          }
         ],
         files: [
           { name: "Trem Regionale Milão - Tirano - Milão", file: "Trenord - Regionale - Trem Milão - Tirano - Milão.pdf", type: "Trem" },
@@ -1471,9 +1627,18 @@
         title: "05 de Novembro (Quinta-feira)",
         subtitle: "Milão ➔ Florença",
         timeline: [
-          { time: "11:00", title: "Check-out Ostello Bello Milano", desc: "Caminhada rápida até a estação Milano Centrale." },
-          { time: "12:30", title: "Trem Frecciarossa Alta Velocidade", desc: "Viagem rápida e confortável até Firenze Santa Maria Novella." },
-          { time: "14:00", title: "Check-in Hotel S. Giorgio & Olimpic", desc: "Via S. Antonino 3 (a 150 metros da estação ferroviária)." }
+          { 
+            time: "12:30", 
+            title: "Trem Frecciarossa (Milano Centrale)", 
+            desc: "Embarque no trem de alta velocidade com destino a Florença.",
+            mapQuery: "Milano Centrale Railway Station"
+          },
+          { 
+            time: "14:00", 
+            title: "Check-in Hotel S. Giorgio & Olimpic", 
+            desc: "Via S. Antonino 3, Santa Maria Novella, Florença (a 150m da estação).",
+            mapQuery: "Hotel S. Giorgio & Olimpic, Via Sant'Antonino 3, Firenze"
+          }
         ],
         files: [
           { name: "Trem Frecciarossa Milão - Florença", file: "Frecciarossa - Trem Milão - Florença (OMIO).pdf", type: "Trem" },
@@ -1491,9 +1656,18 @@
         title: "06 de Novembro (Sexta-feira)",
         subtitle: "Florença • David de Michelangelo",
         timeline: [
-          { time: "09:00", title: "Apresentação na Galleria dell'Accademia", desc: "Chegar 15 min antes com documento de identificação." },
-          { time: "09:30", title: "Entrada Galleria dell'Accademia", desc: "Visita confirmada à estátua de David de Michelangelo." },
-          { time: "15:00", title: "Ponte Vecchio & Piazzale Michelangelo", desc: "Pôr do sol panorâmico sobre o Rio Arno e colinas toscanas." }
+          { 
+            time: "09:30", 
+            title: "Galleria dell'Accademia (David)", 
+            desc: "Via Ricasoli 58/60, Florença. Entrada confirmada para ver a obra de Michelangelo.",
+            mapQuery: "Galleria dell'Accademia, Via Ricasoli 58, Firenze"
+          },
+          { 
+            time: "15:00", 
+            title: "Ponte Vecchio & Piazzale Michelangelo", 
+            desc: "Pôr do sol panorâmico sobre o Rio Arno e colinas toscanas.",
+            mapQuery: "Piazzale Michelangelo, Firenze"
+          }
         ],
         files: [
           { name: "Ingressos Galleria dell'Accademia", file: "Galleria Dell'Academia - Ingressos - Florença.pdf", type: "Ingresso" }
@@ -1510,9 +1684,18 @@
         title: "07 de Novembro (Sábado)",
         subtitle: "Bate-volta Pisa & Lucca",
         timeline: [
-          { time: "08:30", title: "Trem Trenitalia (Florença ➔ Pisa)", desc: "Visita à Piazza dei Miracoli e Torre Inclinada de Pisa." },
-          { time: "13:00", title: "Trem Pisa ➔ Lucca", desc: "Passeio pelas muralhas renascentistas e centro histórico." },
-          { time: "18:30", title: "Trem de retorno para Florença", desc: "Jantar na Piazza della Signoria." }
+          { 
+            time: "08:30", 
+            title: "Trem Trenitalia ➔ Pisa (Torre Inclinada)", 
+            desc: "Visita à Piazza dei Miracoli e Torre Pendente de Pisa.",
+            mapQuery: "Torre de Pisa, Piazza del Duomo, Pisa"
+          },
+          { 
+            time: "13:00", 
+            title: "Passeio pelo Centro Histórico de Lucca", 
+            desc: "Caminhada pelas famosas muralhas renascentistas e Piazza dell'Anfiteatro.",
+            mapQuery: "Piazza dell'Anfiteatro, Lucca"
+          }
         ],
         files: [
           { name: "Passagens Trem Florença - Pisa", file: "Trenitalia - Trem - Florença - Pisa.pdf", type: "Trem" }
@@ -1532,8 +1715,18 @@
         title: "08 de Novembro (Domingo)",
         subtitle: "Florença / Vale do Chianti",
         timeline: [
-          { time: "10:00", title: "Dia pelos vinhedos da Toscana", desc: "Colinas verdes de Chianti ou museus Uffizi e Bargello." },
-          { time: "19:00", title: "Noite de despedida de Florença", desc: "Bistecca alla Fiorentina e gelato artesanal." }
+          { 
+            time: "10:00", 
+            title: "Vinhedos da Toscana & Chianti", 
+            desc: "Passeio pelas colinas e degustação dos vinhos clássicos toscanos.",
+            mapQuery: "Greve in Chianti, Florence"
+          },
+          { 
+            time: "19:00", 
+            title: "Jantar na Piazza della Signoria", 
+            desc: "Despedida gastronômica de Florença com Bistecca alla Fiorentina.",
+            mapQuery: "Piazza della Signoria, Firenze"
+          }
         ],
         files: [],
         sketch: `
@@ -1547,9 +1740,18 @@
         title: "09 de Novembro (Segunda-feira)",
         subtitle: "Florença ➔ Roma",
         timeline: [
-          { time: "11:00", title: "Check-out Hotel S. Giorgio", desc: "Embarque na estação Firenze SMN." },
-          { time: "12:00", title: "Trem Frecciarossa (Florença ➔ Roma)", desc: "1h35 de trajeto em alta velocidade até Roma Termini." },
-          { time: "14:00", title: "Check-in Hotel Patria Roma", desc: "Via Torino 36 (a 5 minutos da estação Termini)." }
+          { 
+            time: "12:00", 
+            title: "Trem Frecciarossa (Firenze SMN ➔ Roma)", 
+            desc: "Viagem de 1h35 em alta velocidade até a estação Roma Termini.",
+            mapQuery: "Stazione di Firenze Santa Maria Novella"
+          },
+          { 
+            time: "14:00", 
+            title: "Check-in Hotel Patria Roma", 
+            desc: "Via Torino 36, Roma (a 5 minutos a pé de Roma Termini).",
+            mapQuery: "Hotel Patria, Via Torino 36, Roma"
+          }
         ],
         files: [
           { name: "Trem Frecciarossa Florença - Roma", file: "Frecciarossa - Trem Florença-Roma (OMIO).pdf", type: "Trem" },
@@ -1567,9 +1769,24 @@
         title: "10 de Novembro (Terça-feira)",
         subtitle: "Roma • Coliseu & Fórum Romano",
         timeline: [
-          { time: "08:30", title: "Fontana di Trevi", desc: "Moeda na fonte antes das multidões matinais." },
-          { time: "09:45", title: "Entrada Reservada no Coliseu", desc: "Acesso com bilhete eletrônico Valadier (Fórum e Palatino 24h)." },
-          { time: "14:30", title: "Panteão & Piazza Navona", desc: "Cúpula milenar com oculus e fontes de Bernini." }
+          { 
+            time: "08:30", 
+            title: "Fontana di Trevi", 
+            desc: "Tradição da moeda na fonte matinal.",
+            mapQuery: "Fontana di Trevi, Roma"
+          },
+          { 
+            time: "09:45", 
+            title: "Coliseu, Fórum Romano e Palatino", 
+            desc: "Piazza del Colosseo. Entrada Valadier para os monumentos imperiais.",
+            mapQuery: "Colosseum, Piazza del Colosseo 1, Roma"
+          },
+          { 
+            time: "14:30", 
+            title: "Panteão & Piazza Navona", 
+            desc: "Cúpula monumental com oculus e fontes barrocas.",
+            mapQuery: "Pantheon, Piazza della Rotonda, Roma"
+          }
         ],
         files: [
           { name: "Ingressos Coliseu, Fórum & Palatino", file: "Ingressos Coliseo e Palatino (1).pdf", type: "Ingresso" }
@@ -1586,9 +1803,24 @@
         title: "11 de Novembro (Quarta-feira)",
         subtitle: "Vaticano & Capela Sistina",
         timeline: [
-          { time: "09:00", title: "Audiência Geral na Praça de São Pedro", desc: "Presença e bênção papal na praça vaticana." },
-          { time: "10:30", title: "Museus do Vaticano & Capela Sistina", desc: "Entrada Corridoio 1 (Passageway 1). Código 2L2NFHU119XTF1U1B." },
-          { time: "15:00", title: "Basílica de São Pedro & Castel Sant'Angelo", desc: "Caminhada pela orla do Rio Tibre." }
+          { 
+            time: "09:00", 
+            title: "Audiência Geral Papal (Praça São Pedro)", 
+            desc: "Presença e bênção papal na grande colunata de Bernini.",
+            mapQuery: "Piazza San Pietro, Città del Vaticano"
+          },
+          { 
+            time: "10:30", 
+            title: "Museus do Vaticano & Capela Sistina", 
+            desc: "Viale Vaticano. Acesso Corridoio 1 (Código 2L2NFHU119XTF1U1B).",
+            mapQuery: "Musei Vaticani, Viale Vaticano, Roma"
+          },
+          { 
+            time: "15:00", 
+            title: "Castel Sant'Angelo", 
+            desc: "Passeio pela Via della Conciliazione e ponte fortificada.",
+            mapQuery: "Castel Sant'Angelo, Lungotevere Castello 50, Roma"
+          }
         ],
         files: [
           { name: "Ingressos Museus Vaticano e Capela Sistina", file: "Ingressos - Museus do Vaticano e Capela Sistina.pdf", type: "Ingresso" }
@@ -1605,8 +1837,18 @@
         title: "12 de Novembro (Quinta-feira)",
         subtitle: "Roma • Trastevere & Jardins",
         timeline: [
-          { time: "10:00", title: "Villa Borghese ou Monumento a Vittorio Emanuele", desc: "Vistas panorâmicas de Roma." },
-          { time: "16:00", title: "Bairro de Trastevere", desc: "Ruas medievais de paralelepípedos e trattorias autênticas." }
+          { 
+            time: "10:00", 
+            title: "Villa Borghese & Terrazza del Pincio", 
+            desc: "Jardins clássicos com vista panorâmica de Roma.",
+            mapQuery: "Terrazza del Pincio, Roma"
+          },
+          { 
+            time: "16:00", 
+            title: "Bairro Boêmio de Trastevere", 
+            desc: "Ruas medievais de paralelepípedos e trattorias autênticas.",
+            mapQuery: "Piazza di Santa Maria in Trastevere, Roma"
+          }
         ],
         files: [],
         sketch: `
@@ -1620,8 +1862,18 @@
         title: "13 de Novembro (Sexta-feira)",
         subtitle: "Roma ➔ Barcelona",
         timeline: [
-          { time: "12:00", title: "Check-out Hotel Patria Roma", desc: "Deslocamento ao aeroporto Fiumicino (FCO)." },
-          { time: "16:00", title: "Voo Vueling (Roma ➔ Barcelona)", desc: "Voo de retorno para Barcelona. Noite no Ten to Go ou aeroporto." }
+          { 
+            time: "12:00", 
+            title: "Translado Aeroporto Roma Fiumicino (FCO)", 
+            desc: "Embarque no Voo Vueling para Barcelona às 16:00.",
+            mapQuery: "Aeroporto di Roma Fiumicino Leonardo da Vinci"
+          },
+          { 
+            time: "18:00", 
+            title: "Chegada em Barcelona (El Prat)", 
+            desc: "Última noite de descanso na Catalunha.",
+            mapQuery: "Aeropuerto Josep Tarradellas Barcelona-El Prat"
+          }
         ],
         files: [
           { name: "Voo Vueling Roma - Barcelona (Gustavo)", file: "VUELING - ROMA-BARCELONA - GUSTAVO RODRIGUES.pdf", type: "Voo" },
@@ -1638,9 +1890,18 @@
         title: "14 de Novembro (Sábado)",
         subtitle: "Barcelona ➔ São Paulo (Brasil)",
         timeline: [
-          { time: "09:00", title: "Apresentação no Aeroporto El Prat (BCN)", desc: "Tax free, despacho de bagagens e segurança internacional." },
-          { time: "12:00", title: "Voo LATAM LA 8115 (Barcelona ➔ São Paulo)", desc: "Partida às 12:00 de Barcelona." },
-          { time: "19:00", title: "Pouso no Aeroporto de Guarulhos (SP)", desc: "Chegada em casa!" }
+          { 
+            time: "09:00", 
+            title: "Apresentação Aeroporto BCN El Prat", 
+            desc: "Tax free, despacho e embarque no voo LATAM LA 8115 às 12:00.",
+            mapQuery: "Aeropuerto Josep Tarradellas Barcelona-El Prat, Terminal 1"
+          },
+          { 
+            time: "19:00", 
+            title: "Pouso no Aeroporto de Guarulhos (SP)", 
+            desc: "Chegada no Brasil. Fim da EuroTrip!",
+            mapQuery: "Aeroporto Internacional de Guarulhos, Terminal 3"
+          }
         ],
         files: [
           { name: "Passagens LATAM (Retorno São Paulo)", file: "LATAM - Passagens SP - Barcelona - SP (1).pdf", type: "Voo" }
@@ -1671,11 +1932,18 @@
       data.timeline.forEach(item => {
         const div = document.createElement('div');
         div.className = 'timeline-row';
+        
+        // Link dinâmico do Google Maps com rota direta em 1 clique
+        const mapHtml = item.mapQuery 
+          ? `<a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(item.mapQuery)}" target="_blank" rel="noopener">📍 Como Chegar (Maps)</a>` 
+          : '';
+
         div.innerHTML = `
           <div class="timeline-time-badge">${item.time}</div>
           <div class="timeline-content">
             <strong>${item.title}</strong>
-            ${item.desc}
+            <div>${item.desc}</div>
+            ${mapHtml}
           </div>
         `;
         tBox.appendChild(div);
