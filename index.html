@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno de Bordo - EuroTrip 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fcf9f2;
+      --paper-line: #e4dec8;
+      --ink: #2b2b2b;
+      --ink-soft: #555148;
+      --pencil: #7c776b;
+      --tape: rgba(230, 207, 142, 0.65);
+      --stamp-red: #c0392b;
+      --stamp-blue: #2980b9;
+      --accent-gold: #d4a373;
+      --shadow-sketch: 3px 4px 0px rgba(43, 43, 43, 0.15);
+      --font-hand: 'Kalam', cursive;
+      --font-doodle: 'Caveat', cursive;
+      --font-body: 'Nunito', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #e9e3d3;
+      background-image: radial-gradient(#d3cbba 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      padding: 24px 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sketchbook {
+      max-width: 1200px;
+      width: 100%;
+      background: var(--paper);
+      background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+      background-size: 100% 28px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      box-shadow: 12px 14px 0px rgba(40, 35, 25, 0.25);
+      padding: 32px 28px;
+      position: relative;
+    }
+
+    /* Washi tape decoration */
+    .washi-tape {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-1.5deg);
+      background: var(--tape);
+      width: 170px;
+      height: 32px;
+      border-left: 3px dashed rgba(0,0,0,0.1);
+      border-right: 3px dashed rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: var(--font-hand);
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+      color: var(--ink);
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.06);
+    }
+
+    header p {
+      font-family: var(--font-doodle);
+      font-size: 1.45rem;
+      color: var(--ink-soft);
+      font-weight: 700;
+    }
+
+    .passport-stamps {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stamp {
+      border: 2px dashed var(--stamp-red);
+      color: var(--stamp-red);
+      padding: 3px 10px;
+      font-family: var(--font-hand);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 4px;
+      transform: rotate(-3deg);
+    }
+
+    .stamp.blue {
+      border-color: var(--stamp-blue);
+      color: var(--stamp-blue);
+      transform: rotate(2deg);
+    }
+
+    /* Grid layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 28px;
+    }
+
+    @media (max-width: 980px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Calendar styles */
+    .calendar-container {
+      background: #fffefb;
+      border: 2.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: var(--shadow-sketch);
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+    }
+
+    .calendar-header h2 {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .day-name {
+      text-align: center;
+      font-family: var(--font-hand);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--pencil);
+      padding: 4px;
+    }
+
+    .day-card {
+      min-height: 82px;
+      border: 2px solid var(--paper-line);
+      border-radius: 8px;
+      padding: 6px;
+      background: #faf7ee;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .day-card:hover {
+      border-color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 2px 3px 0 var(--ink);
+    }
+
+    .day-card.active {
+      border-color: var(--ink);
+      background: #fbf0d9;
+      box-shadow: 3px 4px 0 var(--ink);
+    }
+
+    .day-card.empty {
+      background: transparent;
+      border: 1px dashed #e3dec9;
+      cursor: default;
+    }
+    .day-card.empty:hover { transform: none; box-shadow: none; border-color: #e3dec9; }
+
+    .day-number {
+      font-family: var(--font-hand);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .day-dest {
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #3f3b33;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: -0.2px;
+    }
+
+    .day-badge {
+      font-size: 0.65rem;
+      display: inline-block;
+      padding: 1px 4px;
+      background: rgba(0,0,0,0.06);
+      border-radius: 4px;
+      font-weight: 700;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    /* Day details panel */
+    .details-panel {
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: var(--shadow-sketch);
+      position: relative;
+    }
+
+    .details-panel::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 25px;
+      width: 40px;
+      height: 18px;
+      background: var(--tape);
+      transform: rotate(4deg);
+    }
+
+    .day-title {
+      font-family: var(--font-hand);
+      font-size: 1.8rem;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .day-subtitle {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--pencil);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      border-bottom: 1.5px dashed var(--paper-line);
+      padding-bottom: 6px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .timeline-time {
+      font-family: var(--font-hand);
+      font-size: 1.05rem;
+      font-weight: 700;
+      min-width: 55px;
+      color: var(--stamp-red);
+      padding-top: 2px;
+    }
+
+    .timeline-desc {
+      background: #fbf9f4;
+      border: 1.5px solid var(--paper-line);
+      border-radius: 6px;
+      padding: 7px 10px;
+      flex: 1;
+      font-size: 0.88rem;
+      line-height: 1.35;
+    }
+
+    .timeline-desc strong {
+      display: block;
+      color: #1f1d19;
+      font-size: 0.92rem;
+    }
+
+    .files-section h3 {
+      font-family: var(--font-hand);
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .files-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .file-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fdfaf2;
+      border: 1.5px dashed var(--ink);
+      border-radius: 6px;
+      padding: 9px 12px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.86rem;
+      transition: all 0.15s ease;
+    }
+
+    .file-btn:hover {
+      background: #f1ebd9;
+      transform: translateX(3px);
+      border-style: solid;
+    }
+
+    .file-btn span.badge {
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--tape);
+      color: #3c3218;
+      font-weight: 800;
+    }
+
+    /* Sketches / illustrations */
+    .sketch-card {
+      margin-top: 18px;
+      background: #fffdf7;
+      border: 2px dashed #b7b09c;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .sketch-card svg {
+      width: 100%;
+      height: 120px;
+      stroke: #3c3830;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sketch-caption {
+      font-family: var(--font-doodle);
+      font-size: 1.15rem;
+      color: var(--pencil);
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* Bottom utilities */
+    .quick-bar {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .quick-card {
+      background: #faf7ee;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 2px 3px 0 var(--ink);
+    }
+
+    .quick-card h4 {
+      font-family: var(--font-hand);
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-card p, .quick-card li {
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .quick-card ul {
+      list-style-position: inside;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sketchbook">
+    <div class="washi-tape"></div>
+
+    <header>
+      <h1>Caderno de Bordo & Calendário de Viagem</h1>
+      <p>Europa 2026 • 24 de Outubro a 14 de Novembro</p>
+      <div class="passport-stamps">
+        <div class="stamp">Espanha 24/10</div>
+        <div class="stamp blue">Andorra 27/10</div>
+        <div class="stamp">Países Baixos 29/10</div>
+        <div class="stamp blue">Bélgica 01/11</div>
+        <div class="stamp">Suíça 04/11</div>
+        <div class="stamp blue">Itália 05/11</div>
+      </div>
+    </header>
+
+    <div class="main-grid">
+      <!-- CALENDAR GRID -->
+      <section class="calendar-container">
+        <div class="calendar-header">
+          <h2>Outubro / Novembro 2026</h2>
+          <span style="font-family: var(--font-doodle); font-size: 1.25rem; color: var(--pencil);">Toque no dia para ver os detalhes</span>
+        </div>
+
+        <div class="calendar-grid">
+          <div class="day-name">DOM</div>
+          <div class="day-name">SEG</div>
+          <div class="day-name">TER</div>
+          <div class="day-name">QUA</div>
+          <div class="day-name">QUI</div>
+          <div class="day-name">SEX</div>
+          <div class="day-name">SÁB</div>
+
+          <!-- Linha 1 -->
+          <div class="day-card empty"></div>
+          <div class="day-card empty"></div>
+          <div class="day-card empty"></div>
+          <div class="day-card empty"></div>
+          <div class="day-card empty"></div>
+          <div class="day-card empty"></div>
+          <div class="day-card" onclick="selectDay('2026-10-24')">
+            <span class="day-number">24/10</span>
+            <span class="day-dest">Saída SP</span>
+            <span class="day-badge">✈️ Voo LATAM</span>
+          </div>
+
+          <!-- Linha 2 -->
+          <div class="day-card" onclick="selectDay('2026-10-25')">
+            <span class="day-number">25/10</span>
+            <span class="day-dest">Barcelona</span>
+            <span class="day-badge">🛬 Chegada</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-26')">
+            <span class="day-number">26/10</span>
+            <span class="day-dest">Barcelona</span>
+            <span class="day-badge">🏛️ Sagrada Família</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-27')">
+            <span class="day-number">27/10</span>
+            <span class="day-dest">BCN ➔ Andorra</span>
+            <span class="day-badge">♨️ Caldea SPA</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-28')">
+            <span class="day-number">28/10</span>
+            <span class="day-dest">Andorra ➔ BCN</span>
+            <span class="day-badge">🚌 Directbus</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-29')">
+            <span class="day-number">29/10</span>
+            <span class="day-dest">BCN ➔ Amsterdã</span>
+            <span class="day-badge">✈️ KLM</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-30')">
+            <span class="day-number">30/10</span>
+            <span class="day-dest">Amsterdã</span>
+            <span class="day-badge">📖 Anne Frank</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-10-31')">
+            <span class="day-number">31/10</span>
+            <span class="day-dest">Amsterdã</span>
+            <span class="day-badge">🚲 Livre</span>
+          </div>
+
+          <!-- Linha 3 -->
+          <div class="day-card" onclick="selectDay('2026-11-01')">
+            <span class="day-number">01/11</span>
+            <span class="day-dest">AMS ➔ Bruxelas</span>
+            <span class="day-badge">🚆 Eurocity</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-02')">
+            <span class="day-number">02/11</span>
+            <span class="day-dest">Bruxelas</span>
+            <span class="day-badge">🍫 Grand-Place</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-03')">
+            <span class="day-number">03/11</span>
+            <span class="day-dest">Bruxelas ➔ Milão</span>
+            <span class="day-badge">✈️ ITA AZ151</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-04')">
+            <span class="day-number">04/11</span>
+            <span class="day-dest">Milão / St Moritz</span>
+            <span class="day-badge">🏔️ Bernina Exp.</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-05')">
+            <span class="day-number">05/11</span>
+            <span class="day-dest">Milão ➔ Florença</span>
+            <span class="day-badge">🚅 Frecciarossa</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-06')">
+            <span class="day-number">06/11</span>
+            <span class="day-dest">Florença</span>
+            <span class="day-badge">🎨 Accademia</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-07')">
+            <span class="day-number">07/11</span>
+            <span class="day-dest">Pisa & Lucca</span>
+            <span class="day-badge">🚆 Bate-volta</span>
+          </div>
+
+          <!-- Linha 4 -->
+          <div class="day-card" onclick="selectDay('2026-11-08')">
+            <span class="day-number">08/11</span>
+            <span class="day-dest">Florença / Chianti</span>
+            <span class="day-badge">🍷 Toscana</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-09')">
+            <span class="day-number">09/11</span>
+            <span class="day-dest">Florença ➔ Roma</span>
+            <span class="day-badge">🏨 Hotel Patria</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-10')">
+            <span class="day-number">10/11</span>
+            <span class="day-dest">Roma</span>
+            <span class="day-badge">🏛️ Coliseu 09:45</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-11')">
+            <span class="day-number">11/11</span>
+            <span class="day-dest">Vaticano & Roma</span>
+            <span class="day-badge">🇻🇦 Museus 10:30</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-12')">
+            <span class="day-number">12/11</span>
+            <span class="day-dest">Roma</span>
+            <span class="day-badge">🏛️ Panteão / Fontana</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-13')">
+            <span class="day-number">13/11</span>
+            <span class="day-dest">Roma ➔ BCN</span>
+            <span class="day-badge">✈️ Iberia Voo</span>
+          </div>
+          <div class="day-card" onclick="selectDay('2026-11-14')">
+            <span class="day-number">14/11</span>
+            <span class="day-dest">BCN ➔ São Paulo</span>
+            <span class="day-badge">✈️ Voo LATAM</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DAY DETAILS & FILE LINKS -->
+      <aside class="details-panel" id="detailsBox">
+        <h2 class="day-title" id="dTitle">26 de Outubro</h2>
+        <div class="day-subtitle" id="dSub">Barcelona • Museu & Arquitetura</div>
+
+        <div class="timeline" id="dTimeline">
+          <!-- Timeline items dynamically inserted -->
+        </div>
+
+        <div class="files-section">
+          <h3>📎 Vouchers & Documentos</h3>
+          <div class="files-list" id="dFiles">
+            <!-- Files buttons dynamically inserted -->
+          </div>
+        </div>
+
+        <div class="sketch-card" id="dSketch">
+          <!-- SVG Sketch dynamically updated -->
+        </div>
+      </aside>
+    </div>
+
+    <!-- QUICK REFERENCE BAR -->
+    <div class="quick-bar">
+      <div class="quick-card">
+        <h4>🚨 Telefones de Emergência</h4>
+        <ul>
+          <li><strong>Central AIG Mastercard Black:</strong> +1-636-722-7111 (a cobrar)</li>
+          <li><strong>Espanha (Ligação Grátis):</strong> 900-97-1231</li>
+          <li><strong>Itália (Ligação Grátis):</strong> 800-870-866</li>
+          <li><strong>Holanda:</strong> 0800-022-5821 | <strong>Bélgica:</strong> 080-1-5096</li>
+        </ul>
+      </div>
+
+      <div class="quick-card">
+        <h4>🏨 Hospedagens Principais</h4>
+        <ul>
+          <li><strong>Andorra:</strong> Hotel de l'Isard (Check-in 27/10 14h)</li>
+          <li><strong>Amsterdã:</strong> ibis Budget City South (Check-in 29/10)</li>
+          <li><strong>Florença:</strong> Hotel S. Giorgio & Olimpic (05 a 09/11)</li>
+          <li><strong>Roma:</strong> Hotel Patria - Via Torino 36 (09 a 13/11)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dicionário com todas as informações dos dias, horários e arquivos dos vouchers
+    const tripData = {
+      "2026-10-24": {
+        title: "24 de Outubro (Sábado)",
+        subtitle: "São Paulo ➔ Barcelona",
+        timeline: [
+          { time: "15:00", title: "Apresentação no Aeroporto GRU", desc: "Terminal Internacional de Guarulhos para despacho e segurança." },
+          { time: "18:10", title: "Embarque Voo LA 8114", desc: "LATAM Linhas Aéreas direto para Barcelona (El Prat)." }
+        ],
+        files: [
+          { name: "Passagens Aéreas LATAM (São Paulo - Barcelona)", file: "Passagem LATAM SP-BCN.pdf", type: "Voo" },
+          { name: "Seguro Viagem MasterAssist - Gustavo", file: "Seguro AIG Gustavo.pdf", type: "Seguro" },
+          { name: "Seguro Viagem MasterAssist - Gabriel", file: "Seguro AIG Gabriel.pdf", type: "Seguro" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M20,65 L70,55 L130,25 L160,25 L145,55 L180,55 L190,65 L145,67 L100,85 L85,85 L95,67 Z" stroke-dasharray="2,2"/>
+            <path d="M10,80 Q50,70 180,30" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+          </svg>
+          <div class="sketchcaption">Partida de São Paulo rumo à Europa</div>
+        `
+      },
+      "2026-10-25": {
+        title: "25 de Outubro (Domingo)",
+        subtitle: "Chegada em Barcelona",
+        timeline: [
+          { time: "08:40", title: "Pouso no Aeroporto El Prat (BCN)", desc: "Desembarque, imigração europeia e retirada de bagagem." },
+          { time: "10:00", title: "Imigração & Translado para o Hotel", desc: "Deslocamento até a região de Sants-Montjuïc." },
+          { time: "17:00", title: "Check-in Ten To Go Hostel", desc: "Carrer de Valladolid, 43. Descanso e caminhada pelo bairro." }
+        ],
+        files: [
+          { name: "Reserva Ten To Go Hostel Barcelona", file: "Ten To Go Hostel - Barcelona.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M40,90 L40,40 L70,30 L100,40 L100,90 Z M55,50 L55,60 M85,50 L85,60 M70,75 L70,90"/>
+            <path d="M120,90 L120,60 L145,50 L170,60 L170,90 Z M145,75 L145,90"/>
+            <path d="M10,90 L190,90"/>
+          </svg>
+          <div class="sketch-caption">Passeig de Gràcia & Arquitetura Catalã</div>
+        `
+      },
+      "2026-10-26": {
+        title: "26 de Outubro (Segunda-feira)",
+        subtitle: "Barcelona • Sagrada Família",
+        timeline: [
+          { time: "09:30", title: "Chegada à Sagrada Família", desc: "Apresentar ingressos na entrada de visitantes." },
+          { time: "10:00", title: "Ingresso Sagrada Família + Torre", desc: "Visita ao interior e subida à Torre da Fachada da Natividade." },
+          { time: "14:00", title: "Tarde livre pelo Bairro Gótico e orla", desc: "Parc Güell ou passeio pelas Ramblas." }
+        ],
+        files: [
+          { name: "Voucher Sagrada Família (Torre Natividade)", file: "Sagrada Familia - Barcelona.pdf", type: "Ingresso" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 110">
+            <!-- Sketch Sagrada Família -->
+            <path d="M60,95 L60,35 L70,15 L80,35 L80,95 M120,95 L120,35 L130,15 L140,35 L140,95"/>
+            <path d="M80,45 L120,45 M80,65 L120,65 M80,85 L120,85"/>
+            <path d="M90,30 L100,10 L110,30 L110,95 L90,95 Z"/>
+            <circle cx="70" cy="22" r="2"/><circle cx="130" cy="22" r="2"/><circle cx="100" cy="18" r="2.5"/>
+            <path d="M30,95 L170,95"/>
+          </svg>
+          <div class="sketch-caption">Basílica de la Sagrada Família</div>
+        `
+      },
+      "2026-10-27": {
+        title: "27 de Outubro (Terça-feira)",
+        subtitle: "Barcelona ➔ Andorra La Vella",
+        timeline: [
+          { time: "06:15", title: "Ônibus Directbus (Saída BCN Sants)", desc: "Estação de Ônibus de Sants - Carrer Viriat. Assentos 1, 72, 73." },
+          { time: "09:15", title: "Chegada em Andorra La Vella", desc: "Estação Central de Autobuses de Andorra." },
+          { time: "11:00", title: "Entrada Premium no Caldea SPA", desc: "4 horas de relaxamento nas termas de montanha." },
+          { time: "14:00", title: "Check-in Hotel de L'Isard", desc: "Avenida Meritxell, 36. Quarto Triplo Superior." }
+        ],
+        files: [
+          { name: "Bilhete Directbus - Gustavo (Ida)", file: "Passagem Ida Andorra - Gustavo.pdf", type: "Ônibus" },
+          { name: "Bilhete Directbus - Gabriel (Ida)", file: "Passagem Ida Andorra - Gabriel.pdf", type: "Ônibus" },
+          { name: "Bilhete Directbus - Jéssica (Ida)", file: "Passagem Ida Andorra - Jéssica Siqueira.pdf", type: "Ônibus" },
+          { name: "Reserva Caldea SPA Premium", file: "Voucher Caldea SPA.pdf", type: "Ingresso" },
+          { name: "Reserva Hotel de L'Isard", file: "Hotel de L'Isard - Andorra.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Montanhas dos Pirineus e Caldea -->
+            <path d="M10,85 L50,30 L85,70 L130,20 L175,85 Z" stroke-width="1.8"/>
+            <path d="M110,85 L125,50 L140,85 Z"/>
+            <path d="M60,65 Q80,55 100,65 Q120,75 140,65" stroke-dasharray="2,2"/>
+          </svg>
+          <div class="sketch-caption">Pirineus & Termas de Caldea</div>
+        `
+      },
+      "2026-10-28": {
+        title: "28 de Outubro (Quarta-feira)",
+        subtitle: "Andorra La Vella ➔ Barcelona",
+        timeline: [
+          { time: "10:00", title: "Check-out Hotel de L'Isard", desc: "Manhã para compras na Av. Meritxell." },
+          { time: "10:45", title: "Ônibus Directbus (Andorra ➔ BCN)", desc: "Estação de Autobuses. Chegada prevista às 13:45 em Sants." },
+          { time: "14:00", title: "Tarde e Noite em Barcelona", desc: "Passeio final pela cidade e tapas catalãs." }
+        ],
+        files: [
+          { name: "Bilhete Directbus - Gustavo (Volta)", file: "Passagem Volta Andorra - Gustavo.pdf", type: "Ônibus" },
+          { name: "Bilhete Directbus - Gabriel (Volta)", file: "Passagem Volta Andorra - Gabriel.pdf", type: "Ônibus" },
+          { name: "Bilhete Directbus - Jéssica (Volta)", file: "Passagem Volta Andorra - Jéssica Siqueira.pdf", type: "Ônibus" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <rect x="40" y="45" width="120" height="40" rx="6"/>
+            <circle cx="65" cy="85" r="9"/><circle cx="135" cy="85" r="9"/>
+            <line x1="50" y1="58" x2="80" y2="58"/><line x1="90" y1="58" x2="120" y2="58"/><line x1="130" y1="58" x2="150" y2="58"/>
+            <path d="M10,95 L190,95"/>
+          </svg>
+          <div class="sketch-caption">Retorno pelos vales de Andorra</div>
+        `
+      },
+      "2026-10-29": {
+        title: "29 de Outubro (Quinta-feira)",
+        subtitle: "Barcelona ➔ Amsterdã",
+        timeline: [
+          { time: "17:00", title: "Deslocamento ao Aeroporto BCN", desc: "Trem ou Aerobús até o terminal de partidas." },
+          { time: "19:00", title: "Voo KL 1520 (BCN ➔ AMS)", desc: "Voo KLM Royal Dutch Airlines direto para Schiphol." },
+          { time: "22:30", title: "Check-in ibis Budget City South", desc: "Prof J H Bavincklaan 1, Amstelveen (Amsterdam South)." }
+        ],
+        files: [
+          { name: "Fatura & Bilhete KLM Barcelona-Amsterdã", file: "KLM - Fatura Compra Passagens Barcelona - Amsterdã.pdf", type: "Voo" },
+          { name: "Reserva ibis budget Amsterdam", file: "ibis Budget Amsterdam City South.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M80,85 L95,45 L115,45 L130,85 Z"/>
+            <line x1="105" y1="45" x2="70" y2="25"/><line x1="105" y1="45" x2="140" y2="25"/>
+            <line x1="105" y1="45" x2="75" y2="70"/><line x1="105" y1="45" x2="135" y2="70"/>
+            <circle cx="105" cy="45" r="4"/>
+            <path d="M20,90 Q60,80 180,90" stroke-dasharray="2,2"/>
+          </svg>
+          <div class="sketch-caption">Moinhos e canais de Amsterdã</div>
+        `
+      },
+      "2026-10-30": {
+        title: "30 de Outubro (Sexta-feira)",
+        subtitle: "Amsterdã • Anne Frank",
+        timeline: [
+          { time: "09:45", title: "Caminhada pelo bairro Jordaan", desc: "Canais históricos e pontes tradicionais." },
+          { time: "10:15", title: "Casa de Anne Frank (Horário Marcado)", desc: "Janela de entrada: 10:15 - 10:30. Ingressos salvos no smartphone." },
+          { time: "14:00", title: "Passeio de barco ou Museu Van Gogh", desc: "Explorar a Praça dos Museus (Museumplein)." }
+        ],
+        files: [
+          { name: "Ingresso Casa de Anne Frank (10:15)", file: "Casa Anne Frank - Gustavo.pdf", type: "Ingresso" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M40,90 L40,35 L65,20 L90,35 L90,90 Z M55,40 L75,40 M55,55 L75,55 M55,70 L75,70"/>
+            <path d="M90,90 L90,40 L115,25 L140,40 L140,90 Z M105,45 L125,45 M105,60 L125,60"/>
+            <path d="M15,90 C50,92 150,92 185,90"/>
+            <path d="M20,95 Q100,105 180,95"/>
+          </svg>
+          <div class="sketch-caption">Casas históricas à beira do canal</div>
+        `
+      },
+      "2026-10-31": {
+        title: "31 de Outubro (Sábado)",
+        subtitle: "Amsterdã Livre",
+        timeline: [
+          { time: "10:00", title: "Passeio pelo Vondelpark", desc: "Caminhada ou bicicleta no parque principal da cidade." },
+          { time: "14:30", title: "Mercado Albert Cuypmarkt & De Pijp", desc: "Gastronomia típica (Stroopwafels e queijos holandeses)." }
+        ],
+        files: [],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <circle cx="60" cy="70" r="18"/><circle cx="140" cy="70" r="18"/>
+            <path d="M60,70 L95,70 L125,50 L95,50 L60,70"/>
+            <path d="M95,70 L115,40 L140,70"/>
+            <path d="M110,35 L125,35"/>
+          </svg>
+          <div class="sketch-caption">Explorando Amsterdã sobre duas rodas</div>
+        `
+      },
+      "2026-11-01": {
+        title: "01 de Novembro (Domingo)",
+        subtitle: "Amsterdã ➔ Bruxelas",
+        timeline: [
+          { time: "09:00", title: "Check-out ibis Budget South", desc: "Deslocamento até a estação ferroviária Amsterdam Centraal." },
+          { time: "10:30", title: "Trem Eurocity (AMS ➔ Bruxelas)", desc: "Viagem panorâmica entre Holanda e Bélgica." },
+          { time: "14:00", title: "Check-in a&o Brussels Centrum", desc: "Blvd. du Roi Albert II, 44. Instalação e passeio até a Grand-Place." }
+        ],
+        files: [
+          { name: "Passagem Trem NS Eurocity Amsterdã-Bruxelas", file: "Trem NS Amsterdã - Bruxelas.pdf", type: "Trem" },
+          { name: "Reserva a&o Brussels Centrum", file: "a&o Brussels Centrum - Bruxelas.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M70,90 L70,35 L100,10 L130,35 L130,90 Z"/>
+            <line x1="100" y1="10" x2="100" y2="4"/>
+            <path d="M85,50 L115,50 M85,65 L115,65 M95,80 L105,80 L105,90 L95,90 Z"/>
+            <path d="M30,90 L170,90"/>
+          </svg>
+          <div class="sketch-caption">Torre da Prefeitura na Grand-Place</div>
+        `
+      },
+      "2026-11-02": {
+        title: "02 de Novembro (Segunda-feira)",
+        subtitle: "Bruxelas",
+        timeline: [
+          { time: "09:30", title: "Grand-Place e Ilô Sacré", desc: "Arquitetura barroca das Casas das Guildas e Manneken Pis." },
+          { time: "14:00", title: "Atomium ou Palácio Real", desc: "Degustação de chocolates belgas e waffles de Liège." }
+        ],
+        files: [],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <circle cx="100" cy="50" r="10"/><circle cx="60" cy="30" r="8"/><circle cx="140" cy="30" r="8"/><circle cx="60" cy="70" r="8"/><circle cx="140" cy="70" r="8"/>
+            <line x1="100" y1="50" x2="60" y2="30"/><line x1="100" y1="50" x2="140" y2="30"/><line x1="100" y1="50" x2="60" y2="70"/><line x1="100" y1="50" x2="140" y2="70"/>
+            <line x1="60" y1="30" x2="140" y2="30"/><line x1="60" y1="70" x2="140" y2="70"/>
+          </svg>
+          <div class="sketch-caption">O icônico monumento Atomium</div>
+        `
+      },
+      "2026-11-03": {
+        title: "03 de Novembro (Terça-feira)",
+        subtitle: "Bruxelas ➔ Milão",
+        timeline: [
+          { time: "07:00", title: "Check-out a&o Brussels & Ida ao Aeroporto", desc: "Deslocamento ao Brussels Airport (BRU)." },
+          { time: "09:25", title: "Voo ITA Airways AZ151 (BRU ➔ LIN)", desc: "Decolagem às 09:25. Pouso em Milão Linate às 10:50." },
+          { time: "14:30", title: "Check-in Ostello Bello Milano Centrale", desc: "Via Roberto Lepetit 33, a poucos passos da Milano Centrale." }
+        ],
+        files: [
+          { name: "Bilhete ITA Airways AZ151 - Gustavo", file: "Reserva ITA Airways - Gustavo Rodrigues - Bruxelas - Milão.pdf", type: "Voo" },
+          { name: "Bilhete ITA Airways AZ151 - Gabriel", file: "Reserva ITA Airways - Gabriel Gaspar - Bruxelas - Milão.pdf", type: "Voo" },
+          { name: "Reserva Ostello Bello Milano Centrale", file: "Ostello Bello Milano Centrale.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M40,90 L60,40 L100,20 L140,40 L160,90 Z"/>
+            <line x1="100" y1="20" x2="100" y2="5"/>
+            <line x1="75" y1="35" x2="75" y2="20"/><line x1="125" y1="35" x2="125" y2="20"/>
+            <path d="M85,90 L85,70 Q100,60 115,70 L115,90 Z"/>
+          </svg>
+          <div class="sketch-caption">Duomo di Milano e Galeria Vittorio Emanuele</div>
+        `
+      },
+      "2026-11-04": {
+        title: "04 de Novembro (Quarta-feira)",
+        subtitle: "Milão ➔ Bernina Express (Alpes) ➔ Milão",
+        timeline: [
+          { time: "06:20", title: "Trem Regionale 2812 (Milano ➔ Tirano)", desc: "Partida de Milano Centrale. Chegada em Tirano às 08:52." },
+          { time: "09:41", title: "Trem Bernina Express (Tirano ➔ St. Moritz)", desc: "Subida histórica pela ferrovia panorâmica dos Alpes Suíços." },
+          { time: "12:30", title: "Tarde Livre em St. Moritz", desc: "Passeio ao redor do lago alpino e centro histórico." },
+          { time: "16:00", title: "Trem de Retorno St. Moritz ➔ Tirano", desc: "Descida dos Alpes suíços rumo à fronteira italiana." },
+          { time: "20:08", title: "Trem Regionale 2843 (Tirano ➔ Milano)", desc: "Partida de Tirano. Chegada a Milano Centrale às 22:40." }
+        ],
+        files: [
+          { name: "Bilhete Trenord Milão ➔ Tirano (06:20)", file: "Trem Trenord Milao Tirano.pdf", type: "Trem" },
+          { name: "Bilhete Bernina Express RhB (Alpes Suíços)", file: "Bernina Express - Gabriel & Gustavo.pdf", type: "Trem" },
+          { name: "Bilhete Trenord Tirano ➔ Milão (20:08)", file: "Trem Trenord Tirano Milao.pdf", type: "Trem" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Viaduto espiral de Brusio e Alpes -->
+            <path d="M15,50 L55,15 L95,45 L145,10 L185,55" stroke-width="1.8"/>
+            <path d="M50,85 C60,60 140,60 150,85" stroke-width="2"/>
+            <path d="M80,85 L80,72 M100,85 L100,68 M120,85 L120,72"/>
+            <path d="M10,90 L190,90"/>
+          </svg>
+          <div class="sketch-caption">Viaduto Brusio & Ferrovia Rética Bernina</div>
+        `
+      },
+      "2026-11-05": {
+        title: "05 de Novembro (Quinta-feira)",
+        subtitle: "Milão ➔ Florença",
+        timeline: [
+          { time: "11:00", title: "Check-out Ostello Bello Milano", desc: "Caminhada rápida até a Milano Centrale." },
+          { time: "12:30", title: "Trem Frecciarossa de Alta Velocidade", desc: "Viagem confortável e rápida até Firenze Santa Maria Novella." },
+          { time: "14:00", title: "Check-in Hotel S. Giorgio & Olimpic", desc: "Via S. Antonino 3, a 150m da estação ferroviária." }
+        ],
+        files: [
+          { name: "Reserva Hotel S. Giorgio & Olimpic Florença", file: "Hotel S. Giorgio & Olimpic Florença.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Cúpula de Brunelleschi -->
+            <path d="M70,90 L70,55 Q100,15 130,55 L130,90 Z" stroke-width="2"/>
+            <line x1="100" y1="15" x2="100" y2="5"/>
+            <circle cx="100" cy="5" r="2.5"/>
+            <path d="M45,90 L45,40 L60,40 L60,90 M140,90 L140,40 L155,40 L155,90"/>
+          </svg>
+          <div class="sketch-caption">Duomo de Santa Maria del Fiore</div>
+        `
+      },
+      "2026-11-06": {
+        title: "06 de Novembro (Sexta-feira)",
+        subtitle: "Florença • David de Michelangelo",
+        timeline: [
+          { time: "09:00", title: "Caminhada até a Via Ricasoli", desc: "Apresentação com 15 min de antecedência na Galleria." },
+          { time: "09:30", title: "Galleria dell'Accademia (Entrada Confirmada)", desc: "Visita ao David de Michelangelo e obras renascentistas." },
+          { time: "14:30", title: "Ponte Vecchio e Piazzale Michelangelo", desc: "Pôr do sol panorâmico sobre Florença e Rio Arno." }
+        ],
+        files: [
+          { name: "Ingresso Galleria dell'Accademia - Gustavo & Gabriel", file: "Galleria dell'Accademia - Florença.pdf", type: "Ingresso" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M10,75 Q60,65 190,75"/>
+            <rect x="40" y="55" width="25" height="20"/><rect x="85" y="55" width="30" height="20"/><rect x="135" y="55" width="25" height="20"/>
+            <path d="M40,75 Q52,85 65,75 M85,75 Q100,85 115,75 M135,75 Q147,85 160,75"/>
+          </svg>
+          <div class="sketch-caption">Ponte Vecchio sobre o Rio Arno</div>
+        `
+      },
+      "2026-11-07": {
+        title: "07 de Novembro (Sábado)",
+        subtitle: "Bate-volta Pisa & Lucca",
+        timeline: [
+          { time: "08:30", title: "Trem Trenitalia (Florença ➔ Pisa)", desc: "Visita à Piazza dei Miracoli e Torre Inclinada." },
+          { time: "13:00", title: "Trem Pisa ➔ Lucca", desc: "Passeio pelas muralhas renascentistas e centro histórico." },
+          { time: "18:30", title: "Trem de retorno para Florença", desc: "Jantar na Piazza della Signoria." }
+        ],
+        files: [],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Torre de Pisa inclinada -->
+            <g transform="rotate(7 100 80)">
+              <rect x="90" y="25" width="22" height="60" rx="2"/>
+              <line x1="90" y1="35" x2="112" y2="35"/><line x1="90" y1="45" x2="112" y2="45"/><line x1="90" y1="55" x2="112" y2="55"/><line x1="90" y1="65" x2="112" y2="65"/><line x1="90" y1="75" x2="112" y2="75"/>
+            </g>
+            <path d="M40,88 L160,88"/>
+          </svg>
+          <div class="sketch-caption">Torre Pendente de Pisa</div>
+        `
+      },
+      "2026-11-08": {
+        title: "08 de Novembro (Domingo)",
+        subtitle: "Florença / Vale do Chianti",
+        timeline: [
+          { time: "10:00", title: "Dia pelos vinhedos da Toscana", desc: "Exploração das colinas de Chianti ou museus Uffizi e Bargello." },
+          { time: "19:00", title: "Última noite em Florença", desc: "Bistecca alla Fiorentina e gelato artesanal." }
+        ],
+        files: [],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M20,80 Q70,55 120,75 Q160,50 190,75" stroke-width="1.8"/>
+            <path d="M50,80 L50,60 Q55,55 60,60 L60,80 Z"/>
+            <path d="M140,75 L140,55 Q145,50 150,55 L150,75 Z"/>
+          </svg>
+          <div class="sketch-caption">Colinas e ciprestes da Toscana</div>
+        `
+      },
+      "2026-11-09": {
+        title: "09 de Novembro (Segunda-feira)",
+        subtitle: "Florença ➔ Roma",
+        timeline: [
+          { time: "11:00", title: "Check-out Hotel S. Giorgio", desc: "Embarque na estação Firenze Santa Maria Novella." },
+          { time: "12:00", title: "Trem Frecciarossa (Florença ➔ Roma Termini)", desc: "1h35 de trajeto em trem de alta velocidade." },
+          { time: "14:00", title: "Check-in Hotel Patria", desc: "Via Torino 36 (a 5 minutos da estação Termini)." }
+        ],
+        files: [
+          { name: "Voucher Decolar Hotel Patria Roma", file: "Roma - Hotel Pátria.pdf.pdf", type: "Hotel" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M50,85 Q100,50 150,85"/>
+            <line x1="70" y1="85" x2="70" y2="72"/><line x1="100" y1="85" x2="100" y2="68"/><line x1="130" y1="85" x2="130" y2="72"/>
+            <path d="M30,90 L170,90"/>
+          </svg>
+          <div class="sketch-caption">Chegada à Cidade Eterna</div>
+        `
+      },
+      "2026-11-10": {
+        title: "10 de Novembro (Terça-feira)",
+        subtitle: "Roma • Coliseu & Fórum Romano",
+        timeline: [
+          { time: "08:30", title: "Fontana di Trevi", desc: "Moeda na fonte antes das multidões matinais." },
+          { time: "09:45", title: "Coliseu (Entrada Reservada)", desc: "Acesso com bilhete eletrônico Valadier. Visita Fórum & Palatino inclusa 24h." },
+          { time: "14:30", title: "Panteão & Piazza Navona", desc: "Cúpula com oclulus e praças do centro histórico." }
+        ],
+        files: [
+          { name: "Bilhete Oficial Coliseu - Gustavo", file: "Coliseu - Gustavo.pdf", type: "Ingresso" },
+          { name: "Bilhete Oficial Coliseu - Gabriel", file: "Coliseu - Gabriel.pdf", type: "Ingresso" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Sketch do Coliseu -->
+            <ellipse cx="100" cy="55" rx="70" ry="32" stroke-dasharray="3,2"/>
+            <path d="M30,55 L30,80 Q100,100 170,80 L170,55" stroke-width="2"/>
+            <path d="M45,60 L45,78 M65,63 L65,83 M85,65 L85,85 M105,65 L105,85 M125,64 L125,84 M145,61 L145,80"/>
+            <path d="M55,67 Q65,60 75,67 M95,69 Q105,62 115,69 M135,67 Q145,60 155,67"/>
+          </svg>
+          <div class="sketch-caption">O imponente Colosseo Romano</div>
+        `
+      },
+      "2026-11-11": {
+        title: "11 de Novembro (Quarta-feira)",
+        subtitle: "Vaticano & Capela Sistina",
+        timeline: [
+          { time: "09:00", title: "Audiência Geral na Praça São Pedro", desc: "Presença na Praça de São Pedro." },
+          { time: "10:30", title: "Museus do Vaticano & Capela Sistina", desc: "Entrada pelo Corridoio 1 / Passageway 1. Código 2L2NFHU119XTF1U1B." },
+          { time: "15:00", title: "Basílica de São Pedro & Castel Sant'Angelo", desc: "Passeio pela Via della Conciliazione e Ponte Sant'Angelo." }
+        ],
+        files: [
+          { name: "Ingressos Museus Vaticani & Capela Sistina", file: "Museus Vaticanos - Gustavo e Gabriel.pdf", type: "Ingresso" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <!-- Cúpula de São Pedro -->
+            <path d="M80,85 L80,50 Q100,20 120,50 L120,85 Z" stroke-width="2"/>
+            <line x1="100" y1="20" x2="100" y2="8"/><line x1="96" y1="12" x2="104" y2="12"/>
+            <path d="M40,85 Q65,70 80,85 M120,85 Q135,70 160,85" stroke-dasharray="2,2"/>
+          </svg>
+          <div class="sketch-caption">Cúpula da Basílica de São Pedro</div>
+        `
+      },
+      "2026-11-12": {
+        title: "12 de Novembro (Quinta-feira)",
+        subtitle: "Roma • Trastevere & Jardins",
+        timeline: [
+          { time: "10:00", title: "Villa Borghese ou Monumento a Vittorio Emanuele", desc: "Vistas panorâmicas de Roma." },
+          { time: "16:00", title: "Bairro de Trastevere", desc: "Ruas medievais de paralelepípedos e trattorias romanas autênticas." }
+        ],
+        files: [],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M40,90 Q80,75 100,55 Q120,75 160,90"/>
+            <circle cx="100" cy="45" r="8"/>
+            <path d="M90,75 Q100,65 110,75"/>
+          </svg>
+          <div class="sketch-caption">Fontanas e recantos de Trastevere</div>
+        `
+      },
+      "2026-11-13": {
+        title: "13 de Novembro (Sexta-feira)",
+        subtitle: "Roma ➔ Barcelona",
+        timeline: [
+          { time: "12:00", title: "Check-out Hotel Patria Roma", desc: "Almoço leve e deslocamento ao aeroporto Fiumicino." },
+          { time: "16:00", title: "Voo IB 5341 / Vueling (Roma ➔ Barcelona)", desc: "Voo de retorno para Barcelona. Noite no Ten to Go ou aeroporto." }
+        ],
+        files: [
+          { name: "Passagens Aéreas Roma - Barcelona", file: "Passagem Roma BCN.pdf", type: "Voo" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M30,60 L70,55 L130,35 L170,35 L150,55 L180,55 L190,62 L150,64 L100,75 Z"/>
+          </svg>
+          <div class="sketch-caption">Voo sobre o Mar Mediterrâneo</div>
+        `
+      },
+      "2026-11-14": {
+        title: "14 de Novembro (Sábado)",
+        subtitle: "Barcelona ➔ São Paulo (Brasil)",
+        timeline: [
+          { time: "09:00", title: "Apresentação no Aeroporto El Prat (BCN)", desc: "Tax free, despacho e embarque internacional." },
+          { time: "12:00", title: "Voo LATAM LA 8115 (Barcelona ➔ São Paulo)", desc: "Partida às 12:00 de Barcelona." },
+          { time: "19:00", title: "Pouso no Aeroporto de Guarulhos (SP)", desc: "Chegada em casa!" }
+        ],
+        files: [
+          { name: "Passagem de Volta LATAM LA 8115", file: "Passagem LATAM SP-BCN.pdf", type: "Voo" }
+        ],
+        sketch: `
+          <svg viewBox="0 0 200 100">
+            <path d="M30,85 L60,40 L90,85 Z M100,85 L130,30 L160,85 Z"/>
+            <path d="M10,85 L190,85"/>
+            <circle cx="160" cy="30" r="12" stroke-dasharray="2,2"/>
+          </svg>
+          <div class="sketch-caption">Retorno para o Brasil • Fim da EuroTrip</div>
+        `
+      }
+    };
+
+    function selectDay(dateStr) {
+      const data = tripData[dateStr];
+      if (!data) return;
+
+      // Update active card
+      document.querySelectorAll('.day-card').forEach(c => c.classList.remove('active'));
+      const activeEl = Array.from(document.querySelectorAll('.day-card')).find(c => c.textContent.includes(dateStr.split('-').slice(1).reverse().join('/')));
+      if (activeEl) activeEl.classList.add('active');
+
+      // Update Details Panel
+      document.getElementById('dTitle').innerText = data.title;
+      document.getElementById('dSub').innerText = data.subtitle;
+
+      // Update Timeline
+      const tBox = document.getElementById('dTimeline');
+      tBox.innerHTML = '';
+      data.timeline.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'timeline-item';
+        div.innerHTML = `
+          <div class="timeline-time">${item.time}</div>
+          <div class="timeline-desc">
+            <strong>${item.title}</strong>
+            ${item.desc}
+          </div>
+        `;
+        tBox.appendChild(div);
+      });
+
+      // Update Files
+      const fBox = document.getElementById('dFiles');
+      fBox.innerHTML = '';
+      if (data.files && data.files.length > 0) {
+        data.files.forEach(f => {
+          const a = document.createElement('a');
+          a.className = 'file-btn';
+          // Link relativo: se os PDFs estiverem na mesma pasta no Google Drive/computador, eles abrem direto
+          a.href = f.file;
+          a.target = '_blank';
+          a.innerHTML = `
+            <span>📄 ${f.name}</span>
+            <span class="badge">${f.type}</span>
+          `;
+          fBox.appendChild(a);
+        });
+      } else {
+        fBox.innerHTML = '<div style="font-size: 0.85rem; color: #888; font-style: italic;">Nenhum voucher com horário obrigatório para este dia.</div>';
+      }
+
+      // Update Sketch
+      document.getElementById('dSketch').innerHTML = data.sketch;
+    }
+
+    // Carregar o primeiro dia por padrão
+    window.onload = () => {
+      selectDay('2026-10-24');
+    };
+  </script>
+</body>
+</html>
