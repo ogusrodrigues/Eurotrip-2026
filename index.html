@@ -98,6 +98,7 @@
       font-weight: 500;
     }
 
+    /* NAV TABS RESPONSIVAS */
     .nav-tabs {
       display: flex;
       background: rgba(255, 255, 255, 0.08);
@@ -838,7 +839,7 @@
           </div>
         </div>
         <div class="stat-box">
-          <div class="stat-info">🗓️</div>
+          <div class="stat-icon">🗓️</div>
           <div class="stat-info">
             <h4>22 Dias</h4>
             <p>24 de Outubro a 14 de Novembro de 2026</p>
@@ -961,7 +962,7 @@
               <div class="day-cell" onclick="selectDay('2026-11-07')">
                 <span class="day-num">07/11</span>
                 <span class="day-dest-tag">Pisa & Lucca</span>
-                <span class="day-pill">🚆 Trenitalia Bate-Volta</span>
+                <span class="day-pill">🚆 Pisa & Lucca Express</span>
               </div>
 
               <div class="day-cell" onclick="selectDay('2026-11-08')">
@@ -1100,7 +1101,15 @@
               <span class="pill">PDF</span>
             </a>
             <a class="doc-link-btn" href="Trenitalia - Trem - Florença - Pisa.pdf" target="_blank">
-              <span>Trenitalia: Florença ➔ Pisa</span>
+              <span>Trenitalia: Florença ➔ Pisa (Trecho 1)</span>
+              <span class="pill">PDF</span>
+            </a>
+            <a class="doc-link-btn" href="Trenitalia - Trem - Pisa - Lucca.pdf" target="_blank">
+              <span>Trenitalia: Pisa ➔ Lucca (Trecho 2)</span>
+              <span class="pill">PDF</span>
+            </a>
+            <a class="doc-link-btn" href="Trenitalia - Trem - Lucca - Florença.pdf" target="_blank">
+              <span>Trenitalia: Lucca ➔ Pisa ➔ Florença (Retorno)</span>
               <span class="pill">PDF</span>
             </a>
             <a class="doc-link-btn" href="Frecciarossa - Trem Florença-Roma (OMIO).pdf" target="_blank">
@@ -1249,7 +1258,6 @@
     countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // ILUSTRAÇÕES ARTÍSTICAS A LÁPIS (SKETCH) E EVENTOS DE CADA DIA
     const tripDays = {
       "2026-10-24": {
         title: "24 de Outubro (Sábado)",
@@ -1275,20 +1283,15 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Globo e Linhas de Traço Cartográfico -->
             <circle cx="120" cy="60" r="48" stroke="#4a5568" stroke-dasharray="1.5,1.5"/>
             <ellipse cx="120" cy="60" rx="20" ry="48" stroke="#64748b" stroke-width="0.9"/>
             <line x1="72" y1="60" x2="168" y2="60" stroke="#64748b" stroke-width="0.9"/>
-            <!-- Rota pontilhada Brasil - Europa -->
             <path d="M90,75 Q115,28 152,40" stroke="#0284c7" stroke-width="1.6" stroke-dasharray="3,3"/>
-            <!-- Avião em traço fino de grafite -->
             <path d="M145,43 L158,39 L168,26 L171,27 L166,41 L178,43 L183,47 L167,46 L152,54 L147,53 L153,46 Z" fill="#2c3e50" stroke="#1a202c" stroke-width="0.8"/>
-            <!-- Bússola e rosas dos ventos em rascunho -->
             <line x1="45" y1="25" x2="45" y2="45" stroke="#718096" stroke-width="1"/>
             <line x1="35" y1="35" x2="55" y2="35" stroke="#718096" stroke-width="1"/>
             <polygon points="45,20 42,35 48,35" fill="#4a5568"/>
             <text x="42" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#2d3748">N</text>
-            <!-- Hachuras de grafite no fundo -->
             <line x1="20" y1="105" x2="220" y2="105" stroke="#94a3b8" stroke-width="0.8"/>
             <line x1="30" y1="108" x2="210" y2="108" stroke="#cbd5e1" stroke-width="0.6"/>
           </svg>
@@ -1317,28 +1320,21 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Arco do Triunfo de Barcelona (Passeig Lluís Companys) -->
-            <!-- Pilares e base -->
             <rect x="65" y="42" width="22" height="66" stroke="#2c3e50" stroke-width="1.3"/>
             <rect x="153" y="42" width="22" height="66" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Arco Central -->
             <path d="M87,70 Q120,40 153,70 L153,108 L87,108 Z" stroke="#2c3e50" stroke-width="1.4"/>
             <path d="M92,72 Q120,46 148,72" stroke="#64748b" stroke-width="0.9" stroke-dasharray="2,1"/>
-            <!-- Friso superior e torreões neomudéjar -->
             <rect x="58" y="26" width="124" height="16" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="62" y1="34" x2="178" y2="34" stroke="#718096" stroke-width="0.8"/>
-            <!-- Esculturas no topo -->
             <polygon points="62,26 68,14 74,26" stroke="#2c3e50" stroke-width="1.1"/>
             <polygon points="166,26 172,14 178,26" stroke="#2c3e50" stroke-width="1.1"/>
             <rect x="105" y="16" width="30" height="10" stroke="#2c3e50" stroke-width="1.1"/>
-            <!-- Hachuras de tijolos de barro catalão -->
             <line x1="70" y1="52" x2="82" y2="52" stroke="#94a3b8" stroke-width="0.7"/>
             <line x1="70" y1="64" x2="82" y2="64" stroke="#94a3b8" stroke-width="0.7"/>
             <line x1="70" y1="78" x2="82" y2="78" stroke="#94a3b8" stroke-width="0.7"/>
             <line x1="158" y1="52" x2="170" y2="52" stroke="#94a3b8" stroke-width="0.7"/>
             <line x1="158" y1="64" x2="170" y2="64" stroke="#94a3b8" stroke-width="0.7"/>
             <line x1="158" y1="78" x2="170" y2="78" stroke="#94a3b8" stroke-width="0.7"/>
-            <!-- Palmeiras da avenida em traço rascunhado -->
             <path d="M38,108 Q44,78 40,65" stroke="#475569" stroke-width="1.4"/>
             <path d="M40,65 Q30,58 22,64 M40,65 Q33,50 30,52 M40,65 Q45,50 52,56 M40,65 Q50,62 55,68" stroke="#334155" stroke-width="1"/>
             <line x1="15" y1="108" x2="225" y2="108" stroke="#334155" stroke-width="1.2"/>
@@ -1366,32 +1362,25 @@
         files: [],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Sagrada Família detalhada em grafite -->
-            <!-- Torre Central de Jesus Cristo -->
             <polygon points="120,6 113,38 127,38" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="120" y1="6" x2="120" y2="1" stroke="#2c3e50" stroke-width="1.5"/>
             <line x1="117" y1="3" x2="123" y2="3" stroke="#2c3e50" stroke-width="1.5"/>
-            <!-- Torres da Fachada da Natividade -->
             <polygon points="90,18 84,65 96,65" stroke="#2c3e50" stroke-width="1.2"/>
             <polygon points="104,14 98,65 110,65" stroke="#2c3e50" stroke-width="1.2"/>
             <polygon points="136,14 130,65 142,65" stroke="#2c3e50" stroke-width="1.2"/>
             <polygon points="150,18 144,65 156,65" stroke="#2c3e50" stroke-width="1.2"/>
-            <!-- Detalhes vazados e aberturas elípticas das torres -->
             <ellipse cx="90" cy="35" rx="1.5" ry="5" stroke="#475569" stroke-width="0.8"/>
             <ellipse cx="104" cy="32" rx="1.5" ry="5" stroke="#475569" stroke-width="0.8"/>
             <ellipse cx="136" cy="32" rx="1.5" ry="5" stroke="#475569" stroke-width="0.8"/>
             <ellipse cx="150" cy="35" rx="1.5" ry="5" stroke="#475569" stroke-width="0.8"/>
-            <!-- Pináculos de mosaicos cerâmicos (trencadís) -->
             <circle cx="90" cy="18" r="2.2" stroke="#2c3e50" stroke-width="0.8"/>
             <circle cx="104" cy="14" r="2.2" stroke="#2c3e50" stroke-width="0.8"/>
             <circle cx="136" cy="14" r="2.2" stroke="#2c3e50" stroke-width="0.8"/>
             <circle cx="150" cy="18" r="2.2" stroke="#2c3e50" stroke-width="0.8"/>
-            <!-- Fachada e Pórticos Triplos (Fé, Esperança, Caridade) -->
             <path d="M78,65 L162,65 L162,110 L78,110 Z" stroke="#2c3e50" stroke-width="1.3"/>
             <path d="M88,110 Q98,75 108,110" stroke="#2c3e50" stroke-width="1.2"/>
             <path d="M110,110 Q120,70 130,110" stroke="#2c3e50" stroke-width="1.2"/>
             <path d="M132,110 Q142,75 152,110" stroke="#2c3e50" stroke-width="1.2"/>
-            <!-- Hachuras de relevo escultórico -->
             <path d="M82,78 Q120,70 158,78" stroke="#64748b" stroke-width="0.8" stroke-dasharray="2,2"/>
             <line x1="45" y1="110" x2="195" y2="110" stroke="#1e293b" stroke-width="1.4"/>
           </svg>
@@ -1436,22 +1425,16 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Pirineus e a Torre Piramidal de Caldea -->
-            <!-- Montanhas com cumes nevados -->
             <polygon points="15,110 55,35 95,110" stroke="#475569" stroke-width="1.2"/>
             <polygon points="75,110 125,25 175,110" stroke="#334155" stroke-width="1.3"/>
             <polygon points="155,110 195,45 230,110" stroke="#475569" stroke-width="1.2"/>
-            <!-- Neve nos picos -->
             <path d="M47,50 L55,35 L63,50 L55,45 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8"/>
             <path d="M115,42 L125,25 L135,42 L125,37 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Torre Futurista de Vidro de Caldea -->
             <polygon points="120,45 105,110 135,110" stroke="#0284c7" stroke-width="1.5" fill="#f0f9ff"/>
             <line x1="120" y1="45" x2="120" y2="110" stroke="#38bdf8" stroke-width="0.9"/>
-            <!-- Fachadas angulares de vidro -->
             <line x1="110" y1="85" x2="130" y2="85" stroke="#0284c7" stroke-width="0.8"/>
             <line x1="114" y1="68" x2="126" y2="68" stroke="#0284c7" stroke-width="0.8"/>
             <polygon points="135,80 155,110 135,110" stroke="#0284c7" stroke-width="1.1"/>
-            <!-- Vapores termais estilizados -->
             <path d="M90,95 Q95,85 92,75 Q88,68 94,60" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
             <path d="M148,95 Q153,85 150,75 Q146,68 152,60" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round"/>
             <line x1="10" y1="110" x2="230" y2="110" stroke="#1e293b" stroke-width="1.3"/>
@@ -1489,20 +1472,15 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Ponte Românica de la Margineda & Centro Histórico de Andorra -->
-            <!-- Arco de pedra da ponte medieval -->
             <path d="M45,95 Q120,40 195,95" stroke="#2c3e50" stroke-width="2"/>
             <path d="M55,95 Q120,55 185,95" stroke="#334155" stroke-width="1.3"/>
-            <!-- Pedras e parapeito da ponte -->
             <path d="M40,92 Q120,35 200,92" stroke="#64748b" stroke-width="0.8"/>
             <line x1="75" y1="78" x2="75" y2="85" stroke="#64748b" stroke-width="0.8"/>
             <line x1="100" y1="58" x2="100" y2="67" stroke="#64748b" stroke-width="0.8"/>
             <line x1="135" y1="58" x2="135" y2="67" stroke="#64748b" stroke-width="0.8"/>
             <line x1="165" y1="78" x2="165" y2="85" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Rio Gran Valira correndo sob a ponte -->
             <path d="M70,105 Q120,95 170,105" stroke="#38bdf8" stroke-width="1.2"/>
             <path d="M85,110 Q120,102 155,110" stroke="#7dd3fc" stroke-width="0.9"/>
-            <!-- Torre da Igreja de Sant Esteve ao fundo -->
             <rect x="155" y="25" width="16" height="42" stroke="#475569" stroke-width="1.1"/>
             <polygon points="155,25 163,10 171,25" stroke="#334155" stroke-width="1.1"/>
             <rect x="160" y="32" width="6" height="10" rx="3" stroke="#475569" stroke-width="0.8"/>
@@ -1534,16 +1512,10 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Casas do Canal de Amsterdã (Dancing Canal Houses) -->
-            <!-- Casa 1 (Frontão Escadinha) -->
             <path d="M48,105 L48,50 L54,50 L54,42 L60,42 L60,34 L66,34 L66,42 L72,42 L72,50 L78,50 L78,105 Z" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Casa 2 (Frontão Curvo Barroco - Neck Gable) -->
             <path d="M78,105 L78,45 Q93,28 108,45 L108,105 Z" stroke="#334155" stroke-width="1.3"/>
-            <!-- Casa 3 (Frontão Triangular Clássico) -->
             <path d="M108,105 L108,48 L123,30 L138,48 L138,105 Z" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Casa 4 (Frontão Sineiro) -->
             <path d="M138,105 L138,45 Q153,36 168,45 L168,105 Z" stroke="#334155" stroke-width="1.3"/>
-            <!-- Janelas tradicionais com vidraças -->
             <rect x="55" y="58" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
             <rect x="65" y="58" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
             <rect x="55" y="74" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
@@ -1552,7 +1524,6 @@
             <rect x="96" y="55" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
             <rect x="115" y="56" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
             <rect x="125" y="56" width="6" height="9" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Postes de amarração e reflexo na água do canal -->
             <path d="M35,105 L180,105" stroke="#1e293b" stroke-width="1.4"/>
             <path d="M40,111 Q90,108 175,111" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4,3"/>
             <path d="M55,115 Q110,112 165,115" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
@@ -1582,25 +1553,19 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Torre da Westerkerk e Casa de Anne Frank no Prinsengracht -->
-            <!-- Agulha da Igreja Westerkerk ao fundo -->
             <rect x="75" y="35" width="20" height="70" stroke="#334155" stroke-width="1.2"/>
             <polygon points="75,35 85,10 95,35" stroke="#2c3e50" stroke-width="1.3"/>
             <circle cx="85" cy="46" r="4.5" stroke="#2c3e50" stroke-width="0.9"/>
             <line x1="85" y1="10" x2="85" y2="4" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- O Edifício Anexo Secreto (Westermarkt 20) -->
             <rect x="110" y="42" width="55" height="63" stroke="#2c3e50" stroke-width="1.4"/>
             <polygon points="110,42 137,24 165,42" stroke="#2c3e50" stroke-width="1.4"/>
-            <!-- Janelas das águas-furtadas -->
             <rect x="120" y="52" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
             <rect x="135" y="52" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
             <rect x="150" y="52" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
             <rect x="120" y="70" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
             <rect x="135" y="70" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
             <rect x="150" y="70" width="8" height="11" stroke="#475569" stroke-width="0.9"/>
-            <!-- Porta de entrada clássica -->
             <rect x="133" y="88" width="12" height="17" stroke="#2c3e50" stroke-width="1.1"/>
-            <!-- Ponte de madeira sobre o canal Prinsengracht -->
             <path d="M40,105 Q125,98 210,105" stroke="#1e293b" stroke-width="1.4"/>
             <line x1="50" y1="105" x2="50" y2="114" stroke="#475569" stroke-width="1.2"/>
             <line x1="190" y1="105" x2="190" y2="114" stroke="#475569" stroke-width="1.2"/>
@@ -1628,26 +1593,21 @@
         files: [],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Bicicleta Holandesa (Omafiets) no Parapeito do Canal com Moinho -->
-            <!-- Moinho De Gooyer ao fundo -->
             <polygon points="175,98 183,55 197,55 205,98" stroke="#64748b" stroke-width="1"/>
             <line x1="190" y1="55" x2="168" y2="35" stroke="#475569" stroke-width="1.1"/>
             <line x1="190" y1="55" x2="212" y2="35" stroke="#475569" stroke-width="1.1"/>
             <line x1="190" y1="55" x2="175" y2="72" stroke="#475569" stroke-width="1.1"/>
             <line x1="190" y1="55" x2="205" y2="72" stroke="#475569" stroke-width="1.1"/>
-            <!-- Bicicleta clássica em primeiro plano -->
-            <!-- Rodas raiadas -->
             <circle cx="65" cy="85" r="18" stroke="#2c3e50" stroke-width="1.4"/>
             <circle cx="125" cy="85" r="18" stroke="#2c3e50" stroke-width="1.4"/>
             <line x1="65" y1="85" x2="65" y2="67" stroke="#94a3b8" stroke-width="0.6"/>
             <line x1="125" y1="85" x2="125" y2="67" stroke="#94a3b8" stroke-width="0.6"/>
-            <!-- Quadro, guidão e selim -->
             <path d="M65,85 L90,85 L115,62 L85,62 Z" stroke="#1d4e89" stroke-width="1.6"/>
             <path d="M90,85 L85,55" stroke="#1d4e89" stroke-width="1.6"/>
-            <path d="M80,55 L92,55" stroke="#2c3e50" stroke-width="2"/> <!-- Selim -->
+            <path d="M80,55 L92,55" stroke="#2c3e50" stroke-width="2"/>
             <path d="M125,85 L113,50 L105,48" stroke="#1d4e89" stroke-width="1.6"/>
-            <path d="M103,46 Q108,42 115,48" stroke="#2c3e50" stroke-width="1.8"/> <!-- Guidão curvo -->
-            <rect x="114" y="52" width="7" height="6" rx="1" stroke="#d97706" stroke-width="0.8"/> <!-- Cestinha -->
+            <path d="M103,46 Q108,42 115,48" stroke="#2c3e50" stroke-width="1.8"/>
+            <rect x="114" y="52" width="7" height="6" rx="1" stroke="#d97706" stroke-width="0.8"/>
             <line x1="30" y1="103" x2="215" y2="103" stroke="#1e293b" stroke-width="1.3"/>
           </svg>
           <div class="panel-sketch-caption">Bicicleta nos Canais & Moinho</div>
@@ -1676,21 +1636,16 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Grand-Place de Bruxelas (Hôtel de Ville / Prefeitura Gótica) -->
-            <!-- Fachada e arcadas térreas -->
             <rect x="70" y="55" width="100" height="52" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Torre gótica esguia central (Belfry) -->
             <rect x="110" y="25" width="20" height="30" stroke="#2c3e50" stroke-width="1.3"/>
             <polygon points="110,25 120,5 130,25" stroke="#2c3e50" stroke-width="1.4"/>
-            <line x1="120" y1="5" x2="120" y2="1" stroke="#d97706" stroke-width="1.5"/> <!-- São Miguel Arcanjo -->
-            <!-- Fileiras de janelas em arco ogival flamengo -->
+            <line x1="120" y1="5" x2="120" y2="1" stroke="#d97706" stroke-width="1.5"/>
             <rect x="76" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="88" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="100" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="133" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="145" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="157" y="62" width="7" height="12" rx="3" stroke="#475569" stroke-width="0.8"/>
-            <!-- Casas das Guildas vizinhas (Gable Roofs dourados) -->
             <polygon points="45,107 55,68 68,107" stroke="#475569" stroke-width="1.1"/>
             <polygon points="172,107 185,68 195,107" stroke="#475569" stroke-width="1.1"/>
             <line x1="30" y1="107" x2="210" y2="107" stroke="#1e293b" stroke-width="1.4"/>
@@ -1718,26 +1673,20 @@
         files: [],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- O Monumento Atomium em desenho de perspectiva isométrica -->
-            <!-- Esfera Central -->
             <circle cx="120" cy="62" r="11" stroke="#1e293b" stroke-width="1.5" fill="#f8fafc"/>
-            <!-- Esferas periféricas da malha de cristal de ferro -->
             <circle cx="80" cy="30" r="9" stroke="#2c3e50" stroke-width="1.3" fill="#f8fafc"/>
             <circle cx="160" cy="30" r="9" stroke="#2c3e50" stroke-width="1.3" fill="#f8fafc"/>
             <circle cx="80" cy="94" r="9" stroke="#2c3e50" stroke-width="1.3" fill="#f8fafc"/>
             <circle cx="160" cy="94" r="9" stroke="#2c3e50" stroke-width="1.3" fill="#f8fafc"/>
             <circle cx="120" cy="18" r="9.5" stroke="#2c3e50" stroke-width="1.4" fill="#f8fafc"/>
             <circle cx="120" cy="106" r="9.5" stroke="#2c3e50" stroke-width="1.4" fill="#f8fafc"/>
-            <!-- Tubos de aço tubulares interligando os átomos -->
             <line x1="80" y1="30" x2="160" y2="30" stroke="#334155" stroke-width="2.5"/>
             <line x1="80" y1="94" x2="160" y2="94" stroke="#334155" stroke-width="2.5"/>
             <line x1="80" y1="30" x2="80" y2="94" stroke="#334155" stroke-width="2.5"/>
             <line x1="160" y1="30" x2="160" y2="94" stroke="#334155" stroke-width="2.5"/>
-            <!-- Diagonais centrais -->
             <line x1="80" y1="30" x2="160" y2="94" stroke="#475569" stroke-width="2"/>
             <line x1="160" y1="30" x2="80" y2="94" stroke="#475569" stroke-width="2"/>
             <line x1="120" y1="18" x2="120" y2="106" stroke="#475569" stroke-width="2.2"/>
-            <!-- Brilho metálico nas esferas -->
             <path d="M77,26 Q80,24 84,26" stroke="#94a3b8" stroke-width="1.2"/>
             <path d="M157,26 Q160,24 164,26" stroke="#94a3b8" stroke-width="1.2"/>
             <path d="M117,58 Q120,55 125,58" stroke="#94a3b8" stroke-width="1.2"/>
@@ -1775,25 +1724,19 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Duomo di Milano (Fachada de Mármore Branco de Candoglia) -->
-            <!-- Silhueta triangular e agulhas góticas (guglie) -->
             <polygon points="120,10 65,85 175,85" stroke="#2c3e50" stroke-width="1.4"/>
-            <!-- Agulha Maior com a estátua Madonnina dourada -->
             <line x1="120" y1="10" x2="120" y2="2" stroke="#d97706" stroke-width="1.6"/>
             <circle cx="120" cy="2" r="1.5" fill="#f59e0b"/>
-            <!-- Floresta de pináculos góticos -->
             <line x1="75" y1="72" x2="75" y2="45" stroke="#475569" stroke-width="1"/>
             <line x1="88" y1="58" x2="88" y2="35" stroke="#475569" stroke-width="1"/>
             <line x1="102" y1="42" x2="102" y2="22" stroke="#475569" stroke-width="1"/>
             <line x1="138" y1="42" x2="138" y2="22" stroke="#475569" stroke-width="1"/>
             <line x1="152" y1="58" x2="152" y2="35" stroke="#475569" stroke-width="1"/>
             <line x1="165" y1="72" x2="165" y2="45" stroke="#475569" stroke-width="1"/>
-            <!-- Portais de Bronze e Contrafortes -->
             <rect x="65" y="85" width="110" height="23" stroke="#2c3e50" stroke-width="1.3"/>
             <path d="M110,108 Q120,88 130,108" stroke="#2c3e50" stroke-width="1.2"/>
             <path d="M85,108 Q93,92 101,108" stroke="#475569" stroke-width="1"/>
             <path d="M139,108 Q147,92 155,108" stroke="#475569" stroke-width="1"/>
-            <!-- Rosácea central renascentista -->
             <circle cx="120" cy="62" r="8" stroke="#475569" stroke-width="1"/>
             <circle cx="120" cy="62" r="4" stroke="#64748b" stroke-width="0.8"/>
             <line x1="40" y1="108" x2="200" y2="108" stroke="#1e293b" stroke-width="1.4"/>
@@ -1843,17 +1786,12 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Viaduto Helicoidal de Brusio (Kreisviadukt) & Piz Bernina -->
-            <!-- Picos Alpinos Nevados -->
             <polygon points="20,80 65,22 110,80" stroke="#475569" stroke-width="1.1"/>
             <polygon points="85,80 140,15 195,80" stroke="#334155" stroke-width="1.3"/>
             <polygon points="170,80 205,32 235,80" stroke="#475569" stroke-width="1"/>
             <path d="M128,30 L140,15 L152,30 L140,25 Z" fill="#e2e8f0" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Curva Espiral do Viaduto de Brusio em Pedra -->
             <path d="M45,108 C65,72 175,72 195,108" stroke="#2c3e50" stroke-width="2.5" fill="none"/>
-            <!-- Pilares de Cantaria em Arco da Ponte -->
             <path d="M70,95 L70,108 M92,84 L92,108 M120,80 L120,108 M148,84 L148,108 M170,95 L170,108" stroke="#475569" stroke-width="1.6"/>
-            <!-- Trem Vermelho Bernina Express contornando a curva -->
             <rect x="105" y="73" width="16" height="7" rx="1.5" fill="#dc2626" stroke="#991b1b" stroke-width="0.8"/>
             <rect x="123" y="73" width="16" height="7" rx="1.5" fill="#dc2626" stroke="#991b1b" stroke-width="0.8"/>
             <rect x="107" y="75" width="4" height="3" fill="#f8fafc"/>
@@ -1887,22 +1825,16 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Cúpula de Brunelleschi (Santa Maria del Fiore) & Campanário de Giotto -->
-            <!-- Campanário de Giotto (Gothic Tower) -->
             <rect x="52" y="32" width="18" height="76" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="52" y1="52" x2="70" y2="52" stroke="#475569" stroke-width="0.8"/>
             <line x1="52" y1="72" x2="70" y2="72" stroke="#475569" stroke-width="0.8"/>
             <line x1="52" y1="90" x2="70" y2="90" stroke="#475569" stroke-width="0.8"/>
             <rect x="58" y="38" width="6" height="9" rx="3" stroke="#64748b" stroke-width="0.7"/>
-            <!-- O Tambor Octogonal da Catedral -->
             <rect x="85" y="70" width="80" height="38" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Cúpula de Tijolos de Filippo Brunelleschi -->
             <path d="M92,70 Q125,18 158,70 Z" stroke="#b91c1c" stroke-width="1.8" fill="#fef2f2"/>
-            <!-- Nervuras Brancas de Mármore da Cúpula -->
             <path d="M125,23 L125,70" stroke="#2c3e50" stroke-width="1.2"/>
             <path d="M106,42 Q115,55 110,70" stroke="#475569" stroke-width="0.9"/>
             <path d="M144,42 Q135,55 140,70" stroke="#475569" stroke-width="0.9"/>
-            <!-- Lanterna de Mármore no Topo com esfera de Verrocchio -->
             <rect x="121" y="14" width="8" height="9" stroke="#2c3e50" stroke-width="1.1"/>
             <circle cx="125" cy="11" r="2" fill="#f59e0b" stroke="#d97706" stroke-width="0.7"/>
             <line x1="30" y1="108" x2="210" y2="108" stroke="#1e293b" stroke-width="1.4"/>
@@ -1932,24 +1864,16 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- David de Michelangelo em Esboço Clássico & Ponte Vecchio -->
-            <!-- Ponte Vecchio ao fundo -->
             <path d="M25,85 Q120,76 215,85" stroke="#475569" stroke-width="1.3"/>
             <path d="M30,85 Q48,96 66,85 M78,85 Q100,98 122,85 M134,85 Q156,98 178,85" stroke="#334155" stroke-width="1.2"/>
-            <!-- Casinhas de joalheiros sobre a ponte -->
             <rect x="40" y="70" width="16" height="15" stroke="#64748b" stroke-width="0.8"/>
             <rect x="85" y="68" width="22" height="17" stroke="#64748b" stroke-width="0.8"/>
             <rect x="140" y="70" width="18" height="15" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Estátua de David (Busto Clássico em Traço Fino de Grafite) -->
-            <!-- Cabeça com cabelos encaracolados renascentistas -->
             <circle cx="185" cy="35" r="13" stroke="#1e293b" stroke-width="1.3"/>
             <path d="M174,27 Q185,18 196,28 Q185,25 174,27" stroke="#334155" stroke-width="1.4" fill="#f1f5f9"/>
-            <!-- Olhar determinado de perfil clássico -->
             <path d="M176,34 L179,34 M175,37 L177,37" stroke="#1e293b" stroke-width="1"/>
-            <!-- Pescoço e ombro em contrapposto -->
             <path d="M182,48 L180,68 L160,82" stroke="#2c3e50" stroke-width="1.5"/>
             <path d="M192,47 L198,68 L215,80" stroke="#2c3e50" stroke-width="1.5"/>
-            <!-- Músculo peitoral e clavícula -->
             <path d="M175,64 Q188,68 202,64" stroke="#64748b" stroke-width="0.9"/>
             <line x1="20" y1="108" x2="220" y2="108" stroke="#1e293b" stroke-width="1.2"/>
           </svg>
@@ -1962,36 +1886,45 @@
         timeline: [
           { 
             time: "08:30", 
-            title: "Trem Trenitalia ➔ Pisa (Torre Inclinada)", 
-            desc: "Visita à Piazza dei Miracoli e Torre Pendente de Pisa.",
+            title: "Trem Trenitalia (Florença SMN ➔ Pisa)", 
+            desc: "Viagem matinal para Pisa. Visita à Piazza dei Miracoli e Torre Pendente.",
             mapQuery: "Torre de Pisa, Piazza del Duomo, Pisa"
           },
           { 
-            time: "13:00", 
-            title: "Passeio pelo Centro Histórico de Lucca", 
-            desc: "Caminhada pelas famosas muralhas renascentistas e Piazza dell'Anfiteatro.",
+            time: "14:20", 
+            title: "Trem Regionale 18577 (Pisa Centrale ➔ Lucca)", 
+            desc: "Partida de Pisa às 14:20 com chegada em Lucca às 14:47 (2ª Classe).",
+            mapQuery: "Pisa Centrale Railway Station"
+          },
+          { 
+            time: "15:00", 
+            title: "Muralhas e Centro Histórico de Lucca", 
+            desc: "Passeio pelas muralhas renascentistas intactas e Piazza dell'Anfiteatro.",
             mapQuery: "Piazza dell'Anfiteatro, Lucca"
+          },
+          { 
+            time: "16:42", 
+            title: "Trem Retorno: Lucca ➔ Pisa ➔ Florença", 
+            desc: "Trem 18588 saindo de Lucca (16:42), conexão em Pisa (17:13) e Veloce 4048 para Firenze SMN (18:33).",
+            mapQuery: "Stazione Ferroviaria di Lucca, Piazza Ricasoli, Lucca"
           }
         ],
         files: [
-          { name: "Passagens Trem Florença - Pisa", file: "Trenitalia - Trem - Florença - Pisa.pdf", type: "Trem" }
+          { name: "Passagens Trem Florença - Pisa (Ida)", file: "Trenitalia - Trem - Florença - Pisa.pdf", type: "Trem" },
+          { name: "Passagens Trem Pisa - Lucca (Trecho 2)", file: "Trenitalia - Trem - Pisa - Lucca.pdf", type: "Trem" },
+          { name: "Passagens Trem Lucca - Florença (Volta)", file: "Trenitalia - Trem - Lucca - Florença.pdf", type: "Trem" }
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Torre Pendente de Pisa (Campanile della Piazza dei Miracoli) -->
-            <!-- Inclinação dramática de 4 graus rotacionada em bloco -->
+            <!-- Torre de Pisa e as Muralhas de Lucca -->
             <g transform="rotate(7.5 130 108)">
-              <!-- Base sólida com arcadas cegas -->
               <rect x="116" y="90" width="28" height="18" stroke="#2c3e50" stroke-width="1.4"/>
-              <!-- 6 Andares de colunatas circulares em mármore -->
               <rect x="118" y="78" width="24" height="12" stroke="#2c3e50" stroke-width="1.2"/>
               <rect x="118" y="66" width="24" height="12" stroke="#2c3e50" stroke-width="1.2"/>
               <rect x="118" y="54" width="24" height="12" stroke="#2c3e50" stroke-width="1.2"/>
               <rect x="118" y="42" width="24" height="12" stroke="#2c3e50" stroke-width="1.2"/>
               <rect x="118" y="30" width="24" height="12" stroke="#2c3e50" stroke-width="1.2"/>
-              <!-- Célula sineira superior -->
               <rect x="121" y="16" width="18" height="14" stroke="#2c3e50" stroke-width="1.3"/>
-              <!-- Colunas desenhadas em cada andar -->
               <line x1="122" y1="78" x2="122" y2="90" stroke="#475569" stroke-width="0.8"/>
               <line x1="130" y1="78" x2="130" y2="90" stroke="#475569" stroke-width="0.8"/>
               <line x1="138" y1="78" x2="138" y2="90" stroke="#475569" stroke-width="0.8"/>
@@ -2002,12 +1935,11 @@
               <line x1="130" y1="54" x2="130" y2="66" stroke="#475569" stroke-width="0.8"/>
               <line x1="138" y1="54" x2="138" y2="66" stroke="#475569" stroke-width="0.8"/>
             </g>
-            <!-- Batistério de Pisa ao fundo na grama -->
             <path d="M42,108 Q60,65 78,108 Z" stroke="#64748b" stroke-width="1.1"/>
             <circle cx="60" cy="62" r="3" stroke="#64748b" stroke-width="0.8"/>
             <line x1="25" y1="108" x2="215" y2="108" stroke="#1e293b" stroke-width="1.4"/>
           </svg>
-          <div class="panel-sketch-caption">Torre Pendente • Piazza dei Miracoli</div>
+          <div class="panel-sketch-caption">Torre Pendente de Pisa & Muralhas de Lucca</div>
         `
       },
       "2026-11-08": {
@@ -2030,23 +1962,17 @@
         files: [],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Paisagem Bucólica Toscana com Ciprestes e Taça de Vinho Chianti -->
-            <!-- Colinas onduladas com vinhedos -->
             <path d="M15,95 Q70,68 135,88 Q185,62 235,90" stroke="#334155" stroke-width="1.3"/>
             <path d="M30,108 Q95,85 160,102 Q200,90 235,108" stroke="#475569" stroke-width="1.1"/>
-            <!-- Ciprestes toscanos característicos (Cupressus sempervirens) -->
             <polygon points="50,90 47,48 53,48" stroke="#1e293b" stroke-width="1.4" fill="#334155"/>
             <polygon points="62,92 59,54 65,54" stroke="#1e293b" stroke-width="1.3" fill="#334155"/>
             <polygon points="172,82 169,42 175,42" stroke="#1e293b" stroke-width="1.4" fill="#334155"/>
             <polygon points="182,85 180,50 185,50" stroke="#1e293b" stroke-width="1.3" fill="#334155"/>
-            <!-- Vila rústica no topo da colina -->
             <rect x="95" y="68" width="18" height="12" stroke="#475569" stroke-width="1"/>
             <polygon points="95,68 104,60 113,68" stroke="#475569" stroke-width="1"/>
-            <!-- Taça de vinho Chianti Clássico em primeiro plano -->
             <path d="M130,55 Q130,78 140,78 Q150,78 150,55 Z" stroke="#991b1b" stroke-width="1.4" fill="#fef2f2"/>
             <line x1="140" y1="78" x2="140" y2="98" stroke="#991b1b" stroke-width="1.4"/>
             <line x1="132" y1="98" x2="148" y2="98" stroke="#991b1b" stroke-width="1.4"/>
-            <!-- Cachos de uva em traço leve -->
             <circle cx="120" cy="94" r="2.2" stroke="#7c3aed" stroke-width="0.8"/>
             <circle cx="124" cy="94" r="2.2" stroke="#7c3aed" stroke-width="0.8"/>
             <circle cx="122" cy="98" r="2.2" stroke="#7c3aed" stroke-width="0.8"/>
@@ -2077,20 +2003,13 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Piazza Navona com a Fontana dei Quattro Fiumi de Bernini -->
-            <!-- Bacia circular da fonte barroca -->
             <ellipse cx="120" cy="92" rx="65" ry="16" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Rochedo esculpido central com figuras dos rios -->
             <path d="M102,90 Q120,68 138,90 Z" stroke="#334155" stroke-width="1.4"/>
-            <!-- Obelisco de Domiciano erguendo-se sobre a rocha -->
             <polygon points="120,10 116,72 124,72" stroke="#2c3e50" stroke-width="1.4"/>
-            <polygon points="120,10 118,6 122,6" stroke="#2c3e50" stroke-width="1.2"/> <!-- Ponta piramidal -->
-            <!-- Pombinha com ramo de oliveira dos Pamphili no topo -->
+            <polygon points="120,10 118,6 122,6" stroke="#2c3e50" stroke-width="1.2"/>
             <circle cx="120" cy="4" r="1.5" fill="#f59e0b"/>
-            <!-- Jatos de água da fonte esculpidos -->
             <path d="M106,85 Q92,72 90,88" stroke="#38bdf8" stroke-width="1"/>
             <path d="M134,85 Q148,72 150,88" stroke="#38bdf8" stroke-width="1"/>
-            <!-- Fachada curvilínea da Igreja de Sant'Agnese in Agone ao fundo -->
             <path d="M55,95 L55,58 Q70,42 85,58 L85,95" stroke="#64748b" stroke-width="0.9"/>
             <line x1="20" y1="108" x2="220" y2="108" stroke="#1e293b" stroke-width="1.3"/>
           </svg>
@@ -2125,13 +2044,8 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- O Coliseu Romano (Anfiteatro Flaviano) em traço clássico -->
-            <!-- Elipse monumental e parede externa preservada -->
             <path d="M40,55 Q120,25 200,55 L200,105 Q120,118 40,105 Z" stroke="#2c3e50" stroke-width="1.6"/>
-            <!-- Fraturas e degraus do anel externo destruído pelo tempo -->
             <path d="M40,55 L40,105 M200,55 L165,58 L165,72 L135,76" stroke="#2c3e50" stroke-width="1.4"/>
-            <!-- Fileiras de Arcadas Dóricas, Jônicas e Coríntias -->
-            <!-- 3º Nível -->
             <path d="M50,60 Q120,38 160,60" stroke="#64748b" stroke-width="0.9"/>
             <rect x="58" y="52" width="6" height="8" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="74" y="50" width="6" height="8" rx="3" stroke="#475569" stroke-width="0.8"/>
@@ -2139,7 +2053,6 @@
             <rect x="106" y="47" width="6" height="8" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="122" y="47" width="6" height="8" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="138" y="49" width="6" height="8" rx="3" stroke="#475569" stroke-width="0.8"/>
-            <!-- 2º Nível -->
             <path d="M46,75 Q120,54 185,75" stroke="#64748b" stroke-width="0.9"/>
             <rect x="54" y="66" width="7" height="9" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="70" y="64" width="7" height="9" rx="3" stroke="#475569" stroke-width="0.8"/>
@@ -2147,7 +2060,6 @@
             <rect x="106" y="62" width="7" height="9" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="124" y="62" width="7" height="9" rx="3" stroke="#475569" stroke-width="0.8"/>
             <rect x="142" y="63" width="7" height="9" rx="3" stroke="#475569" stroke-width="0.8"/>
-            <!-- 1º Nível (Térreo) -->
             <path d="M42,92 Q120,72 195,92" stroke="#64748b" stroke-width="0.9"/>
             <rect x="52" y="82" width="7" height="10" rx="3.5" stroke="#334155" stroke-width="0.9"/>
             <rect x="70" y="80" width="7" height="10" rx="3.5" stroke="#334155" stroke-width="0.9"/>
@@ -2188,23 +2100,17 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Basílica de São Pedro (Cúpula de Michelangelo) & Colunata de Bernini -->
-            <!-- Cúpula de San Pietro -->
             <path d="M102,60 Q120,18 138,60 Z" stroke="#2c3e50" stroke-width="1.6" fill="#f8fafc"/>
             <line x1="120" y1="20" x2="120" y2="60" stroke="#475569" stroke-width="1"/>
             <path d="M110,36 Q115,48 112,60" stroke="#64748b" stroke-width="0.8"/>
             <path d="M130,36 Q125,48 128,60" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Lanterna superior e Cruz Papal -->
             <rect x="117" y="12" width="6" height="8" stroke="#2c3e50" stroke-width="1"/>
             <line x1="120" y1="12" x2="120" y2="6" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="117" y1="9" x2="123" y2="9" stroke="#2c3e50" stroke-width="1.3"/>
-            <!-- Fachada Maderno e Balcão das Bênçãos -->
             <rect x="85" y="60" width="70" height="32" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="85" y1="72" x2="155" y2="72" stroke="#475569" stroke-width="0.8"/>
-            <!-- As Colunatas Curvas Elípticas da Praça de São Pedro -->
             <path d="M25,104 C40,75 80,82 85,92" stroke="#334155" stroke-width="2.2" fill="none"/>
             <path d="M215,104 C200,75 160,82 155,92" stroke="#334155" stroke-width="2.2" fill="none"/>
-            <!-- Obelisco Vaticano no centro da praça -->
             <polygon points="120,82 118,104 122,104" stroke="#2c3e50" stroke-width="1.1"/>
             <line x1="20" y1="106" x2="220" y2="106" stroke="#1e293b" stroke-width="1.3"/>
           </svg>
@@ -2231,10 +2137,7 @@
         files: [],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- O Panteão de Roma (Pantheon de Agripa) -->
-            <!-- Frontão Triangular Clássico com inscrição M·AGRIPPA -->
             <polygon points="65,58 120,32 175,58" stroke="#2c3e50" stroke-width="1.5" fill="#f8fafc"/>
-            <!-- Colunas Coríntias Monolíticas de Granito -->
             <rect x="75" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
             <rect x="90" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
             <rect x="105" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
@@ -2242,11 +2145,8 @@
             <rect x="135" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
             <rect x="150" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
             <rect x="165" y="58" width="6" height="46" stroke="#334155" stroke-width="1.2"/>
-            <!-- A Rotunda e a Maior Cúpula de Concreto Não Armado do Mundo -->
             <path d="M78,42 Q120,12 162,42" stroke="#2c3e50" stroke-width="1.5"/>
-            <!-- Óculo Central Aberto ao Céu -->
             <ellipse cx="120" cy="22" rx="7" ry="2.5" stroke="#0284c7" stroke-width="1.4" fill="#e0f2fe"/>
-            <!-- Fachada com entablamento e degraus -->
             <line x1="60" y1="104" x2="180" y2="104" stroke="#1e293b" stroke-width="1.5"/>
             <line x1="50" y1="107" x2="190" y2="107" stroke="#1e293b" stroke-width="1.3"/>
           </svg>
@@ -2276,19 +2176,12 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Fontana di Trevi (Palácio Poli & Escultura de Oceano) -->
-            <!-- Fachada do Palazzo Poli com pilastras coríntias -->
             <rect x="55" y="24" width="130" height="52" stroke="#2c3e50" stroke-width="1.3"/>
             <line x1="55" y1="36" x2="185" y2="36" stroke="#475569" stroke-width="0.8"/>
-            <!-- Nicho Central em Arco de Triunfo com a Estátua de Oceano -->
             <path d="M108,76 L108,44 Q120,32 132,44 L132,76 Z" stroke="#334155" stroke-width="1.3"/>
-            <!-- Figura de Netuno/Oceano sobre a carruagem de concha -->
             <path d="M116,68 Q120,55 124,68" stroke="#1e293b" stroke-width="1.4"/>
-            <!-- Rochedo de Travertino e Cavalos-Marinhos alados -->
             <path d="M75,95 Q100,74 120,80 Q140,74 165,95 Z" stroke="#475569" stroke-width="1.3"/>
-            <!-- Bacia monumental de água com cascatas -->
             <path d="M40,105 Q120,88 200,105" stroke="#0284c7" stroke-width="1.8"/>
-            <!-- Moedas lançadas na água (tradição de retorno a Roma) -->
             <circle cx="100" cy="98" r="2" stroke="#d97706" stroke-width="0.8"/>
             <circle cx="138" cy="99" r="2" stroke="#d97706" stroke-width="0.8"/>
             <line x1="25" y1="108" x2="215" y2="108" stroke="#1e293b" stroke-width="1.3"/>
@@ -2318,19 +2211,13 @@
         ],
         sketch: `
           <svg viewBox="0 0 240 120">
-            <!-- Retorno para Casa: Avião aterrissando com coroa de louros e selo -->
-            <!-- Selo postal circular de viagem concluída -->
             <circle cx="120" cy="58" r="42" stroke="#1d4e89" stroke-width="1.5" stroke-dasharray="3,2"/>
             <circle cx="120" cy="58" r="37" stroke="#64748b" stroke-width="0.8"/>
-            <!-- Avião aterrissando suavemente -->
             <path d="M85,55 L115,50 L145,35 L155,36 L148,48 L160,49 L165,54 L150,53 L132,62 L125,61 L132,53 Z" fill="#2c3e50" stroke="#1e293b" stroke-width="1"/>
-            <!-- Linhas de vento e solo -->
             <path d="M70,82 Q120,78 170,82" stroke="#94a3b8" stroke-width="1"/>
             <path d="M85,86 Q120,83 155,86" stroke="#cbd5e1" stroke-width="0.8"/>
-            <!-- Ramo de folhas / louros estilizado -->
             <path d="M60,65 Q52,50 62,38 M62,44 Q56,42 54,46" stroke="#475569" stroke-width="1"/>
             <path d="M180,65 Q188,50 178,38 M178,44 Q184,42 186,46" stroke="#475569" stroke-width="1"/>
-            <!-- Carimbo "MISSION ACCOMPLISHED" em grafite -->
             <text x="75" y="105" font-family="'Outfit', sans-serif" font-size="8" font-weight="900" fill="#1e293b" letter-spacing="1.5">EUROTRIP 2026 • CONCLUÍDA</text>
           </svg>
           <div class="panel-sketch-caption">Chegada em Casa • Retorno ao Brasil</div>
