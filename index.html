@@ -41,8 +41,128 @@
       padding: 12px 8px 36px;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
     }
 
+    /* TELA DE LOGIN */
+    #login-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #0d2b45 0%, #071e3d 100%);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .login-box {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      border: 2px solid #bae6fd;
+      text-align: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .login-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--blue-ice);
+      border: 2px solid var(--blue-sky);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 16px;
+    }
+
+    .login-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      margin-bottom: 6px;
+    }
+
+    .login-subtitle {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      margin-bottom: 24px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--navy-main);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+      color: var(--ink);
+    }
+
+    .form-group input:focus {
+      border-color: var(--blue-vibrant);
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+    }
+
+    .login-btn {
+      margin-top: 10px;
+      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-vibrant) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 13px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0, 119, 182, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 119, 182, 0.4);
+    }
+
+    .login-error {
+      background: #fee2e2;
+      border: 1px solid #f87171;
+      color: #b91c1c;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: none;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* CONTAINER DA APLICAÇÃO */
     .app-container {
       width: 100%;
       max-width: 1280px;
@@ -51,7 +171,7 @@
       box-shadow: var(--shadow-lg);
       border: 1.5px solid #dbeafe;
       overflow: hidden;
-      display: flex;
+      display: none;
       flex-direction: column;
     }
 
@@ -99,6 +219,13 @@
       font-weight: 500;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .nav-tabs {
       display: flex;
       background: rgba(255, 255, 255, 0.08);
@@ -138,9 +265,32 @@
       box-shadow: 0 4px 10px rgba(0, 180, 216, 0.35);
     }
 
+    .logout-btn {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fecaca;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 7px 12px;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .logout-btn:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+    }
+
     @media (max-width: 768px) {
       .top-nav { padding: 14px 12px; }
       .brand { width: 100%; justify-content: center; text-align: center; }
+      .nav-actions { width: 100%; flex-direction: column; gap: 8px; }
       .nav-tabs {
         width: 100%;
         display: grid;
@@ -155,6 +305,7 @@
         border-radius: 10px;
         gap: 3px;
       }
+      .logout-btn { align-self: flex-end; }
     }
 
     .view-content {
@@ -975,7 +1126,32 @@
 </head>
 <body>
 
-  <div class="app-container">
+  <!-- TELA DE LOGIN BLOQUEADA -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="login-icon">🔒</div>
+      <h2 class="login-title">Acesso Restrito</h2>
+      <p class="login-subtitle">EuroTrip 2026 • Diário de Bordo & Roteiro</p>
+
+      <form class="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" placeholder="Insira seu usuário" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Insira sua senha" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="login-btn">Entrar na EuroTrip ✈️</button>
+        <div class="login-error" id="loginError">Usuário ou senha incorretos.</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- APLICAÇÃO PRINCIPAL (INICIALMENTE OCULTA) -->
+  <div class="app-container" id="appContainer">
     <header class="top-nav">
       <div class="brand">
         <div class="brand-icon">✈️</div>
@@ -984,11 +1160,14 @@
           <p class="brand-subtitle">Espanha • Andorra • Holanda • Bélgica • Suíça • Itália</p>
         </div>
       </div>
-      <div class="nav-tabs">
-        <button class="nav-tab-btn active" onclick="switchView('home')">🏠 Início</button>
-        <button class="nav-tab-btn" onclick="switchView('calendar')">📅 Calendário</button>
-        <button class="nav-tab-btn" onclick="switchView('docs')">📂 Arquivos</button>
-        <button class="nav-tab-btn" onclick="switchView('checklist')">🎒 Checklist</button>
+      <div class="nav-actions">
+        <div class="nav-tabs">
+          <button class="nav-tab-btn active" onclick="switchView('home')">🏠 Início</button>
+          <button class="nav-tab-btn" onclick="switchView('calendar')">📅 Calendário</button>
+          <button class="nav-tab-btn" onclick="switchView('docs')">📂 Arquivos</button>
+          <button class="nav-tab-btn" onclick="switchView('checklist')">🎒 Checklist</button>
+        </div>
+        <button class="logout-btn" onclick="logout()" title="Sair da conta">🚪 Sair</button>
       </div>
     </header>
 
@@ -1027,27 +1206,32 @@
             <circle cx="450" cy="35" r="18" fill="#ffd166"/>
             <path d="M520,38 L545,34 L565,22 L575,22 L568,34 L585,34 L590,38 L568,39 L548,46 L540,46 L546,39 Z" fill="#1d4e89"/>
 
+            <!-- 1. Sagrada Família -->
             <path d="M60,160 L60,85 L70,55 L78,85 L85,45 L92,85 L100,55 L110,85 L110,160 Z" fill="#1d4e89"/>
             <circle cx="70" cy="62" r="3" fill="#90e0ef"/><circle cx="85" cy="52" r="3" fill="#90e0ef"/><circle cx="100" cy="62" r="3" fill="#90e0ef"/>
             <rect x="80" y="115" width="10" height="45" rx="5" fill="#e0f2fe"/>
 
+            <!-- 2. Andorra -->
             <polygon points="120,160 160,90 190,160" fill="#0077b6"/>
             <polygon points="150,110 160,90 170,110" fill="#ffffff"/>
             <polygon points="170,160 210,75 250,160" fill="#023e8a"/>
             <polygon points="198,95 210,75 222,95" fill="#ffffff"/>
 
+            <!-- 3. Moinho Amsterdã -->
             <polygon points="280,160 290,105 315,105 325,160" fill="#0096c7"/>
             <line x1="302" y1="105" x2="275" y2="80" stroke="#071e3d" stroke-width="3" stroke-linecap="round"/>
             <line x1="302" y1="105" x2="330" y2="80" stroke="#071e3d" stroke-width="3" stroke-linecap="round"/>
             <line x1="302" y1="105" x2="302" y2="135" stroke="#071e3d" stroke-width="3" stroke-linecap="round"/>
             <circle cx="302" cy="105" r="4" fill="#ffd166"/>
 
+            <!-- 4. Bruxelas -->
             <rect x="350" y="95" width="40" height="65" fill="#1d4e89"/>
             <polygon points="350,95 370,60 390,95" fill="#0077b6"/>
             <circle cx="415" cy="85" r="10" fill="#00b4d8"/>
             <circle cx="440" cy="115" r="8" fill="#00b4d8"/>
             <line x1="415" y1="85" x2="440" y2="115" stroke="#0d2b45" stroke-width="3"/>
 
+            <!-- 5. Bernina Express -->
             <polygon points="460,160 500,80 540,160" fill="#023e8a"/>
             <polygon points="490,100 500,80 510,100" fill="#ffffff"/>
             <rect x="525" y="135" width="45" height="25" rx="4" fill="#ff6b6b"/>
@@ -1055,6 +1239,7 @@
             <rect x="545" y="140" width="10" height="8" rx="2" fill="#ffffff"/>
             <circle cx="535" cy="160" r="4" fill="#071e3d"/><circle cx="560" cy="160" r="4" fill="#071e3d"/>
 
+            <!-- 6. Torre de Pisa -->
             <g transform="rotate(8 610 160)">
               <rect x="595" y="75" width="30" height="85" rx="3" fill="#0096c7"/>
               <line x1="595" y1="92" x2="625" y2="92" stroke="#ffffff" stroke-width="2"/>
@@ -1063,11 +1248,13 @@
               <line x1="595" y1="146" x2="625" y2="146" stroke="#ffffff" stroke-width="2"/>
             </g>
 
+            <!-- 7. Florença -->
             <rect x="655" y="110" width="55" height="50" fill="#1d4e89"/>
             <path d="M660,110 Q682,65 705,110 Z" fill="#ff6b6b"/>
             <rect x="680" y="60" width="5" height="8" fill="#ffd166"/>
             <rect x="715" y="85" width="20" height="75" fill="#0077b6"/>
 
+            <!-- 8. Coliseu -->
             <path d="M750,160 L750,115 Q820,95 870,115 L870,160 Z" fill="#0077b6"/>
             <rect x="765" y="125" width="10" height="18" rx="5" fill="#0d2b45"/>
             <rect x="785" y="123" width="10" height="18" rx="5" fill="#0d2b45"/>
@@ -1492,9 +1679,7 @@
         </div>
       </div>
 
-      <div class="checklist-categories-grid" id="checklistGrid">
-        <!-- Renderizado dinamicamente via Javascript -->
-      </div>
+      <div class="checklist-categories-grid" id="checklistGrid"></div>
 
       <div class="reset-checklist-bar">
         <button class="reset-btn" onclick="resetChecklist()">🔄 Limpar todas as marcações</button>
@@ -1515,6 +1700,52 @@
   </div>
 
   <script>
+    /* ========================================================
+       SISTEMA DE AUTENTICAÇÃO E SESSÃO MEMORIZADA
+    ======================================================== */
+    const AUTH_USER = "@eurotripgusegabs";
+    const AUTH_PASS = "Eurotrip#2026";
+    const AUTH_KEY = "eurotrip_session_authenticated";
+
+    function checkAuth() {
+      const isLogged = localStorage.getItem(AUTH_KEY);
+      const loginScreen = document.getElementById("login-screen");
+      const appContainer = document.getElementById("appContainer");
+
+      if (isLogged === "true") {
+        loginScreen.style.display = "none";
+        appContainer.style.display = "flex";
+      } else {
+        loginScreen.style.display = "flex";
+        appContainer.style.display = "none";
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const userInp = document.getElementById("username").value.trim();
+      const passInp = document.getElementById("password").value.trim();
+      const errEl = document.getElementById("loginError");
+
+      if (userInp === AUTH_USER && passInp === AUTH_PASS) {
+        localStorage.setItem(AUTH_KEY, "true");
+        errEl.style.display = "none";
+        checkAuth();
+      } else {
+        errEl.style.display = "block";
+      }
+    }
+
+    function logout() {
+      if (confirm("Deseja sair do diário de bordo?")) {
+        localStorage.removeItem(AUTH_KEY);
+        location.reload();
+      }
+    }
+
+    /* ========================================================
+       NAVEGAÇÃO DE GUIAS
+    ======================================================== */
     function switchView(viewName) {
       document.querySelectorAll('.view-content').forEach(el => el.classList.remove('active-view'));
       document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
@@ -2899,6 +3130,7 @@
     }
 
     window.onload = () => {
+      checkAuth();
       selectDay('2026-10-24');
       renderChecklist();
     };
